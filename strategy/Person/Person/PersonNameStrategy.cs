@@ -5,8 +5,6 @@ namespace Person
 {
 	public abstract class PersonNameStrategy
 	{
-		protected static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
-
 		protected readonly bool _olympicMode;
 		protected readonly bool _capitalizeSurname;
 		protected readonly string _nationality;
@@ -28,13 +26,6 @@ namespace Person
 				surname = familyName.ToUpperInvariant();
 			}
 			return surname;
-		}
-
-		protected static bool IsSurnameFirst(string nationality, bool olympicMode)
-		{
-			if (!olympicMode)
-				return false;
-			return NationalitiesWithSurnameFirst.Contains(nationality);
 		}
 	}
 }
