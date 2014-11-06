@@ -2,8 +2,8 @@
 {
 	public class DefaultPersonNameStrategy : PersonNameStrategy
 	{
-		public DefaultPersonNameStrategy(bool capitalizeSurname, string nationality) 
-			: base(capitalizeSurname, nationality)
+		public DefaultPersonNameStrategy(bool capitalizeSurname) 
+			: base(capitalizeSurname)
 		{
 		}
 

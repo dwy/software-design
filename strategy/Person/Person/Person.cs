@@ -27,7 +27,7 @@ namespace Person
 			}
 			else
 			{
-				_strategy = new DefaultPersonNameStrategy(capitalizeSurname, nationality);
+				_strategy = new DefaultPersonNameStrategy(capitalizeSurname);
 			}
 		}
 

@@ -6,10 +6,12 @@ namespace Person
 	public class OlympicPersonNameStrategy : PersonNameStrategy
 	{
 		protected static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
+		private string _nationality;
 
 		public OlympicPersonNameStrategy(bool capitalizeSurname, string nationality) 
-			: base(capitalizeSurname, nationality)
+			: base(capitalizeSurname)
 		{
+			_nationality = nationality;
 		}
 
 		public override string NameString(string givenName, string familyName)

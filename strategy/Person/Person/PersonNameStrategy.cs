@@ -5,12 +5,10 @@ namespace Person
 	public abstract class PersonNameStrategy
 	{
 		protected readonly bool _capitalizeSurname;
-		protected readonly string _nationality;
 
-		public PersonNameStrategy(bool capitalizeSurname, string nationality)
+		public PersonNameStrategy(bool capitalizeSurname)
 		{
 			_capitalizeSurname = capitalizeSurname;
-			_nationality = nationality;
 		}
 
 		public abstract string NameString(string givenName, string familyName);
