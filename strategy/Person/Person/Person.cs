@@ -32,7 +32,7 @@ namespace Person
 
 		public override string ToString()
 		{
-			return PersonNameStrategy.NameString(givenName, olympicMode, nationality, capitalizeSurname, familyName);
+			return _strategy.NameString(givenName, olympicMode, nationality, capitalizeSurname, familyName);
 		}
 	}
 }
