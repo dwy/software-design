@@ -6,15 +6,25 @@ namespace Person
 	public class PersonNameStrategy
 	{
 		public static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		private bool _olympicMode;
+		private bool _capitalizeSurname;
+		private string _nationality;
 
-		public string NameString(string givenName, bool olympicMode, string nationality, bool capitalizeSurname, string familyName)
+		public PersonNameStrategy(bool olympicMode, bool capitalizeSurname, string nationality)
+		{
+			_olympicMode = olympicMode;
+			_capitalizeSurname = capitalizeSurname;
+			_nationality = nationality;
+		}
+
+		public string NameString(string givenName, string familyName)
 		{
 			String surname = familyName;
-			if (capitalizeSurname)
+			if (_capitalizeSurname)
 			{
 				surname = familyName.ToUpperInvariant();
 			}
-			if (IsSurnameFirst(nationality, olympicMode))
+			if (IsSurnameFirst(_nationality, _olympicMode))
 				return surname + " " + givenName;
 			
 			return givenName + " " + surname;

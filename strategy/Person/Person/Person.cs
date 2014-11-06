@@ -7,9 +7,6 @@ namespace Person
 	{
 		private String familyName;
 		private String givenName;
-		private String nationality;
-		private bool capitalizeSurname;
-		private bool olympicMode;
 
 		private PersonNameStrategy _strategy;
 
@@ -23,16 +20,13 @@ namespace Person
 		{
 			this.familyName = familyName;
 			this.givenName = givenName;
-			this.nationality = nationality;
-			this.capitalizeSurname = capitalizeSurname;
-			this.olympicMode = olympicMode;
 
-			_strategy = new PersonNameStrategy();
+			_strategy = new PersonNameStrategy(olympicMode, capitalizeSurname, nationality);
 		}
 
 		public override string ToString()
 		{
-			return _strategy.NameString(givenName, olympicMode, nationality, capitalizeSurname, familyName);
+			return _strategy.NameString(givenName, familyName);
 		}
 	}
 }
