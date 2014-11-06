@@ -20,15 +20,22 @@ namespace Person
 
 		public virtual string NameString(string givenName, string familyName)
 		{
+			var surname = GetSurname(familyName);
+
+			if (IsSurnameFirst(_nationality, _olympicMode))
+				return surname + " " + givenName;
+			
+			return givenName + " " + surname;
+		}
+
+		protected string GetSurname(string familyName)
+		{
 			String surname = familyName;
 			if (_capitalizeSurname)
 			{
 				surname = familyName.ToUpperInvariant();
 			}
-			if (IsSurnameFirst(_nationality, _olympicMode))
-				return surname + " " + givenName;
-			
-			return givenName + " " + surname;
+			return surname;
 		}
 
 		protected static bool IsSurnameFirst(string nationality, bool olympicMode)
