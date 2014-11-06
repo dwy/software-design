@@ -53,6 +53,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DefaultPersonNameStrategy.cs" />
+    <Compile Include="OlympicPersonNameStrategy.cs" />
     <Compile Include="PersonNameStrategy.cs" />
     <Compile Include="PersonTest.cs" />
     <Compile Include="Person.cs" />
