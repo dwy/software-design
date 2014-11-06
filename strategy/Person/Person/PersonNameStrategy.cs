@@ -5,10 +5,11 @@ namespace Person
 {
 	public class PersonNameStrategy
 	{
-		public static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
-		private bool _olympicMode;
-		private bool _capitalizeSurname;
-		private string _nationality;
+		private static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
+		
+		private readonly bool _olympicMode;
+		private readonly bool _capitalizeSurname;
+		private readonly string _nationality;
 
 		public PersonNameStrategy(bool olympicMode, bool capitalizeSurname, string nationality)
 		{
@@ -17,7 +18,7 @@ namespace Person
 			_nationality = nationality;
 		}
 
-		public string NameString(string givenName, string familyName)
+		public virtual string NameString(string givenName, string familyName)
 		{
 			String surname = familyName;
 			if (_capitalizeSurname)
@@ -30,11 +31,11 @@ namespace Person
 			return givenName + " " + surname;
 		}
 
-		public static bool IsSurnameFirst(string nationality, bool olympicMode)
+		protected static bool IsSurnameFirst(string nationality, bool olympicMode)
 		{
 			if (!olympicMode)
 				return false;
-			return surnameFirst.Contains(nationality);
+			return NationalitiesWithSurnameFirst.Contains(nationality);
 		}
 	}
 }
