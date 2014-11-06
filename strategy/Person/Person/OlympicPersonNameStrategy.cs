@@ -7,8 +7,8 @@ namespace Person
 	{
 		protected static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
 
-		public OlympicPersonNameStrategy(bool olympicMode, bool capitalizeSurname, string nationality) 
-			: base(olympicMode, capitalizeSurname, nationality)
+		public OlympicPersonNameStrategy(bool capitalizeSurname, string nationality) 
+			: base(capitalizeSurname, nationality)
 		{
 		}
 
@@ -16,16 +16,14 @@ namespace Person
 		{
 			var surname = GetSurname(familyName);
 
-			if (IsSurnameFirst(_nationality, _olympicMode))
+			if (IsSurnameFirst(_nationality))
 				return surname + " " + givenName;
 			
 			return givenName + " " + surname;
 		}
 
-		private static bool IsSurnameFirst(string nationality, bool olympicMode)
+		private static bool IsSurnameFirst(string nationality)
 		{
-			if (!olympicMode)
-				return false;
 			return NationalitiesWithSurnameFirst.Contains(nationality);
 		}
 	}

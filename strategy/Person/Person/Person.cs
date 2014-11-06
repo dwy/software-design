@@ -23,11 +23,11 @@ namespace Person
 
 			if (olympicMode)
 			{
-				_strategy = new OlympicPersonNameStrategy(true, capitalizeSurname, nationality);
+				_strategy = new OlympicPersonNameStrategy(capitalizeSurname, nationality);
 			}
 			else
 			{
-				_strategy = new DefaultPersonNameStrategy(false, capitalizeSurname, nationality);
+				_strategy = new DefaultPersonNameStrategy(capitalizeSurname, nationality);
 			}
 		}
 
