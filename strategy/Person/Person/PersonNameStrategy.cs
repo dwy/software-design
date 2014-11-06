@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Person
 {
-	public class PersonNameStrategy
+	public abstract class PersonNameStrategy
 	{
 		protected static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
 
@@ -18,15 +18,7 @@ namespace Person
 			_nationality = nationality;
 		}
 
-		public virtual string NameString(string givenName, string familyName)
-		{
-			var surname = GetSurname(familyName);
-
-			if (IsSurnameFirst(_nationality, _olympicMode))
-				return surname + " " + givenName;
-			
-			return givenName + " " + surname;
-		}
+		public abstract string NameString(string givenName, string familyName);
 
 		protected string GetSurname(string familyName)
 		{
