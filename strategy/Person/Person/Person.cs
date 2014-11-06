@@ -21,7 +21,14 @@ namespace Person
 			this.familyName = familyName;
 			this.givenName = givenName;
 
-			_strategy = new PersonNameStrategy(olympicMode, capitalizeSurname, nationality);
+			if (olympicMode)
+			{
+				_strategy = new OlympicPersonNameStrategy(olympicMode, capitalizeSurname, nationality);
+			}
+			else
+			{
+				_strategy = new DefaultPersonNameStrategy(olympicMode, capitalizeSurname, nationality);
+			}
 		}
 
 		public override string ToString()
