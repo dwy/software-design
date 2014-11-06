@@ -34,10 +34,10 @@ namespace Person
 
 		public override string ToString()
 		{
-			return NameString();
+			return NameString(givenName, olympicMode, nationality, capitalizeSurname, familyName);
 		}
 
-		private String NameString()
+		private static String NameString(string givenName, bool olympicMode, string nationality, bool capitalizeSurname, string familyName)
 		{
 			String surname = familyName;
 			if (capitalizeSurname)
