@@ -44,13 +44,13 @@ namespace Person
 			{
 				surname = familyName.ToUpperInvariant();
 			}
-			if (IsSurnameFirst())
+			if (IsSurnameFirst(nationality, olympicMode))
 				return surname + " " + givenName;
 			
 			return givenName + " " + surname;
 		}
 
-		private bool IsSurnameFirst()
+		private static bool IsSurnameFirst(string nationality, bool olympicMode)
 		{
 			if (!olympicMode)
 				return false;
