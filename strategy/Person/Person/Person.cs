@@ -13,6 +13,7 @@ namespace Person
 
 		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
 
+		private PersonNameStrategy _strategy;
 
 		public Person(String familyName, String givenName, String nationality)
 			: this(familyName, givenName, nationality, false, false)
@@ -27,6 +28,8 @@ namespace Person
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
+
+			_strategy = new PersonNameStrategy();
 		}
 
 		public override string ToString()
