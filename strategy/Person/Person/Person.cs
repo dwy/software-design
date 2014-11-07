@@ -7,7 +7,7 @@ namespace Person
 		private readonly String _familyName;
 		private readonly String _givenName;
 
-		private PersonNameStrategy _strategy;
+		private readonly PersonNameStrategy _strategy;
 
 		public Person(String familyName, String givenName, String nationality,
 			bool olympicMode = false, bool capitalizeSurname = false)
@@ -15,16 +15,7 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 
-			_strategy = CreatePersonNameStrategy(nationality, olympicMode, capitalizeSurname);
-		}
-
-		public PersonNameStrategy CreatePersonNameStrategy(string nationality, bool olympicMode, bool capitalizeSurname)
-		{
-			if (olympicMode)
-			{
-				return new OlympicPersonNameStrategy(capitalizeSurname, nationality);
-			}
-			return new DefaultPersonNameStrategy(capitalizeSurname);
+			_strategy = PersonNameStrategyFactory.CreatePersonNameStrategy(nationality, olympicMode, capitalizeSurname);
 		}
 
 		public override string ToString()
