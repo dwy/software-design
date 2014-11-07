@@ -1,39 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Person
 {
 	public class Person
 	{
-		private String familyName;
-		private String givenName;
+		private readonly String _familyName;
+		private readonly String _givenName;
 
 		private PersonNameStrategy _strategy;
 
-		public Person(String familyName, String givenName, String nationality)
-			: this(familyName, givenName, nationality, false, false)
+		public Person(String familyName, String givenName, String nationality,
+			bool olympicMode = false, bool capitalizeSurname = false)
 		{
+			_familyName = familyName;
+			_givenName = givenName;
+
+			_strategy = CreatePersonNameStrategy(nationality, olympicMode, capitalizeSurname);
 		}
 
-		public Person(String familyName, String givenName, String nationality,
-			bool olympicMode, bool capitalizeSurname)
+		public PersonNameStrategy CreatePersonNameStrategy(string nationality, bool olympicMode, bool capitalizeSurname)
 		{
-			this.familyName = familyName;
-			this.givenName = givenName;
-
 			if (olympicMode)
 			{
-				_strategy = new OlympicPersonNameStrategy(capitalizeSurname, nationality);
+				return new OlympicPersonNameStrategy(capitalizeSurname, nationality);
 			}
-			else
-			{
-				_strategy = new DefaultPersonNameStrategy(capitalizeSurname);
-			}
+			return new DefaultPersonNameStrategy(capitalizeSurname);
 		}
 
 		public override string ToString()
 		{
-			return _strategy.NameString(givenName, familyName);
+			return _strategy.NameString(_givenName, _familyName);
 		}
 	}
 }

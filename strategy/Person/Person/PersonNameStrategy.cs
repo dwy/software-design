@@ -4,9 +4,9 @@ namespace Person
 {
 	public abstract class PersonNameStrategy
 	{
-		protected readonly bool _capitalizeSurname;
+		private readonly bool _capitalizeSurname;
 
-		public PersonNameStrategy(bool capitalizeSurname)
+		protected PersonNameStrategy(bool capitalizeSurname)
 		{
 			_capitalizeSurname = capitalizeSurname;
 		}
