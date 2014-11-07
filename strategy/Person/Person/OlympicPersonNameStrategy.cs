@@ -5,26 +5,26 @@ namespace Person
 {
 	public class OlympicPersonNameStrategy : PersonNameStrategy
 	{
-		private static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
-		private readonly string _nationality;
+		public static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
+		private readonly bool _isSurnameFirst;
 
 		public OlympicPersonNameStrategy(bool capitalizeSurname, string nationality) 
 			: base(capitalizeSurname)
 		{
-			_nationality = nationality;
+			_isSurnameFirst = IsSurnameFirst(nationality);
 		}
 
 		public override string NameString(string givenName, string familyName)
 		{
 			var surname = GetSurname(familyName);
 
-			if (IsSurnameFirst(_nationality))
+			if (_isSurnameFirst)
 				return surname + " " + givenName;
 			
 			return givenName + " " + surname;
 		}
 
-		private static bool IsSurnameFirst(string nationality)
+		public static bool IsSurnameFirst(string nationality)
 		{
 			return NationalitiesWithSurnameFirst.Contains(nationality);
 		}

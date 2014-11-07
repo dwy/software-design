@@ -1,8 +1,8 @@
 ﻿namespace Person
 {
-	public class PersonNameStrategyFactory
+	public static class PersonNameStrategyFactory
 	{
-		public static PersonNameStrategy CreatePersonNameStrategy(string nationality, bool olympicMode, bool capitalizeSurname)
+		public static PersonNameStrategy Create(string nationality, bool olympicMode, bool capitalizeSurname)
 		{
 			if (olympicMode)
 			{

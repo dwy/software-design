@@ -15,7 +15,7 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 
-			_strategy = PersonNameStrategyFactory.CreatePersonNameStrategy(nationality, olympicMode, capitalizeSurname);
+			_strategy = PersonNameStrategyFactory.Create(nationality, olympicMode, capitalizeSurname);
 		}
 
 		public override string ToString()
