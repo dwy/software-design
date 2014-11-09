@@ -6,7 +6,7 @@
 		{
 			if (olympicMode)
 			{
-				return new OlympicPersonNameStrategy(capitalizeSurname, nationality);
+				return new OlympicPersonNameStrategy(capitalizeSurname, OlympicPersonNameStrategy.IsSurnameFirst(nationality));
 			}
 			return new DefaultPersonNameStrategy(capitalizeSurname);
 		}

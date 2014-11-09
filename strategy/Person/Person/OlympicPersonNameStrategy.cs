@@ -8,10 +8,10 @@ namespace Person
 		public static readonly List<String> NationalitiesWithSurnameFirst = new List<String> {"CHN", "KOR"};
 		private readonly bool _isSurnameFirst;
 
-		public OlympicPersonNameStrategy(bool capitalizeSurname, string nationality) 
+		public OlympicPersonNameStrategy(bool capitalizeSurname, bool isSurnameFirst) 
 			: base(capitalizeSurname)
 		{
-			_isSurnameFirst = IsSurnameFirst(nationality);
+			_isSurnameFirst = isSurnameFirst;
 		}
 
 		public override string NameString(string givenName, string familyName)
