@@ -13,6 +13,13 @@ namespace Person
 		}
 
 		[Test]
+		public void ToString_Capitalize()
+		{
+			Person simon = new Person("Ammann", "Simon", "CH", false, true);
+			Assert.AreEqual("Simon AMMANN", simon.ToString());
+		}
+
+		[Test]
 		public void ToString_olympicModeAndCapitalize()
 		{
 			Person simon = new Person("Ammann", "Simon", "CH", true, true);
