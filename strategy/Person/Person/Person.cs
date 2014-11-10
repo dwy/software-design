@@ -11,17 +11,19 @@ namespace Person
 		private bool capitalizeSurname;
 		private bool olympicMode;
 
-		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		private readonly PersonNameStrategy _strategy;
 
 
 		public Person(String familyName, String givenName, String nationality)
 			: this(familyName, givenName, nationality, false, false)
 		{
+			_strategy = new PersonNameStrategy(this);
 		}
 
 		public Person(String familyName, String givenName, String nationality,
 			bool olympicMode, bool capitalizeSurname)
 		{
+			_strategy = new PersonNameStrategy(this);
 			this.familyName = familyName;
 			this.givenName = givenName;
 			this.nationality = nationality;
@@ -29,29 +31,39 @@ namespace Person
 			this.olympicMode = olympicMode;
 		}
 
+		public string FamilyName
+		{
+			set { familyName = value; }
+			get { return familyName; }
+		}
+
+		public string GivenName
+		{
+			set { givenName = value; }
+			get { return givenName; }
+		}
+
+		public string Nationality
+		{
+			set { nationality = value; }
+			get { return nationality; }
+		}
+
+		public bool CapitalizeSurname
+		{
+			set { capitalizeSurname = value; }
+			get { return capitalizeSurname; }
+		}
+
+		public bool OlympicMode
+		{
+			set { olympicMode = value; }
+			get { return olympicMode; }
+		}
+
 		public override string ToString()
 		{
-			return NameString();
-		}
-
-		private String NameString()
-		{
-			String surname = familyName;
-			if (capitalizeSurname)
-			{
-				surname = familyName.ToUpperInvariant();
-			}
-			if (IsSurnameFirst())
-				return surname + " " + givenName;
-			
-			return givenName + " " + surname;
-		}
-
-		private bool IsSurnameFirst()
-		{
-			if (!olympicMode)
-				return false;
-			return surnameFirst.Contains(nationality);
+			return _strategy.NameString();
 		}
 	}
 }
