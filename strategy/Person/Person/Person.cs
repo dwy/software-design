@@ -17,18 +17,27 @@ namespace Person
 		public Person(String familyName, String givenName, String nationality)
 			: this(familyName, givenName, nationality, false, false)
 		{
-			_strategy = new PersonNameStrategy(this);
 		}
 
 		public Person(String familyName, String givenName, String nationality,
 			bool olympicMode, bool capitalizeSurname)
 		{
-			_strategy = new PersonNameStrategy(this);
+			_strategy = CreateStrategy();
 			this.familyName = familyName;
 			this.givenName = givenName;
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
+		}
+
+		private PersonNameStrategy CreateStrategy()
+		{
+			if (OlympicMode)
+			{
+				return new OlympicPersonNameStrategy(this);
+			}
+
+			return new DefaultPersonNameStrategy(this);
 		}
 
 		public string FamilyName
