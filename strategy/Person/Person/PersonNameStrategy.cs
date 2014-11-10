@@ -15,15 +15,21 @@ namespace Person
 
 		public String NameString()
 		{
+			var surname = GetSurname();
+			if (IsSurnameFirst())
+				return surname + " " + _person.GivenName;
+			
+			return _person.GivenName + " " + surname;
+		}
+
+		protected string GetSurname()
+		{
 			String surname = _person.FamilyName;
 			if (_person.CapitalizeSurname)
 			{
 				surname = _person.FamilyName.ToUpperInvariant();
 			}
-			if (IsSurnameFirst())
-				return surname + " " + _person.GivenName;
-			
-			return _person.GivenName + " " + surname;
+			return surname;
 		}
 
 		private bool IsSurnameFirst()
