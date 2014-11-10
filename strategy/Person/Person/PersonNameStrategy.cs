@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Person
 {
-	public class PersonNameStrategy
+	public abstract class PersonNameStrategy
 	{
-		private Person _person;
+		protected Person _person;
 		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
 
 		public PersonNameStrategy(Person person)
@@ -13,14 +13,7 @@ namespace Person
 			_person = person;
 		}
 
-		public String NameString()
-		{
-			var surname = GetSurname();
-			if (IsSurnameFirst())
-				return surname + " " + _person.GivenName;
-			
-			return _person.GivenName + " " + surname;
-		}
+		public abstract String NameString();
 
 		protected string GetSurname()
 		{
@@ -32,7 +25,7 @@ namespace Person
 			return surname;
 		}
 
-		private bool IsSurnameFirst()
+		protected bool IsSurnameFirst()
 		{
 			if (!_person.OlympicMode)
 				return false;
