@@ -68,7 +68,7 @@ namespace Person
 
 		public override string ToString()
 		{
-			return _strategy.NameString(givenName);
+			return _strategy.NameString(givenName, familyName);
 		}
 
 		public static bool IsSurnameFirst(string nationality)

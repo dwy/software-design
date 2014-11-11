@@ -8,10 +8,10 @@ namespace Person
 		{
 		}
 
-		public override string NameString(string givenName)
+		public override string NameString(string givenName, string familyName)
 		{
-			var surname = GetSurname(_person.FamilyName);
-			return _person.GivenName + " " + surname;
+			var surname = GetSurname(familyName);
+			return givenName + " " + surname;
 		}
 	}
 }

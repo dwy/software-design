@@ -14,7 +14,7 @@ namespace Person
 			_capitalizeSurname = _person.CapitalizeSurname;
 		}
 
-		public abstract string NameString(string givenName);
+		public abstract string NameString(string givenName, string familyName);
 
 		protected string GetSurname(string familyName)
 		{
