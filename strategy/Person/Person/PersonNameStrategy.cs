@@ -13,12 +13,12 @@ namespace Person
 
 		public abstract String NameString();
 
-		protected string GetSurname()
+		protected string GetSurname(string familyName)
 		{
-			String surname = _person.FamilyName;
+			String surname = familyName;
 			if (_person.CapitalizeSurname)
 			{
-				surname = _person.FamilyName.ToUpperInvariant();
+				surname = familyName.ToUpperInvariant();
 			}
 			return surname;
 		}

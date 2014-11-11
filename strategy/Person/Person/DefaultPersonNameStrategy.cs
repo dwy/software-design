@@ -10,7 +10,7 @@ namespace Person
 
 		public override String NameString()
 		{
-			var surname = GetSurname();
+			var surname = GetSurname(_person.FamilyName);
 			return _person.GivenName + " " + surname;
 		}
 	}

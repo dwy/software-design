@@ -7,23 +7,26 @@ namespace Person
 
 	{
 		private static readonly List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		private bool _isSurnameFirst;
 
 		public OlympicPersonNameStrategy(Person person) : base(person)
 		{
+			_isSurnameFirst = IsSurnameFirst(_person.Nationality);
 		}
 
 		public override String NameString()
 		{
-			var surname = GetSurname();
-			if (IsSurnameFirst())
-				return surname + " " + _person.GivenName;
+			var surname = GetSurname(_person.FamilyName);
+			var givenName = _person.GivenName;
+			if (_isSurnameFirst)
+				return surname + " " + givenName;
 			
-			return _person.GivenName + " " + surname;
+			return givenName + " " + surname;
 		}
 
-		private bool IsSurnameFirst()
+		private bool IsSurnameFirst(string nationality)
 		{
-			return surnameFirst.Contains(_person.Nationality);
+			return surnameFirst.Contains(nationality);
 		}
 	}
 }
