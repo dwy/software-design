@@ -30,7 +30,7 @@ namespace Person
 		{
 			if (OlympicMode)
 			{
-				return new OlympicPersonNameStrategy(this, nationality);
+				return new OlympicPersonNameStrategy(this, Person.IsSurnameFirst(nationality));
 			}
 
 			return new DefaultPersonNameStrategy(this);

@@ -8,9 +8,9 @@ namespace Person
 	{
 		private readonly bool _isSurnameFirst;
 
-		public OlympicPersonNameStrategy(Person person, string nationality) : base(person)
+		public OlympicPersonNameStrategy(Person person, bool isSurnameFirst) : base(person)
 		{
-			_isSurnameFirst = Person.IsSurnameFirst(nationality);
+			_isSurnameFirst = isSurnameFirst;
 		}
 
 		public override String NameString()
