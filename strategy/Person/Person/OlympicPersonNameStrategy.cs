@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Person
 {
 	public class OlympicPersonNameStrategy : PersonNameStrategy
 
 	{
+		private static readonly List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+
 		public OlympicPersonNameStrategy(Person person) : base(person)
 		{
 		}
@@ -16,6 +19,11 @@ namespace Person
 				return surname + " " + _person.GivenName;
 			
 			return _person.GivenName + " " + surname;
+		}
+
+		private bool IsSurnameFirst()
+		{
+			return surnameFirst.Contains(_person.Nationality);
 		}
 	}
 }

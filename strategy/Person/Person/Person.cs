@@ -14,20 +14,15 @@ namespace Person
 		private readonly PersonNameStrategy _strategy;
 
 
-		public Person(String familyName, String givenName, String nationality)
-			: this(familyName, givenName, nationality, false, false)
-		{
-		}
-
 		public Person(String familyName, String givenName, String nationality,
-			bool olympicMode, bool capitalizeSurname)
+			bool olympicMode = false, bool capitalizeSurname = false)
 		{
-			_strategy = CreateStrategy();
 			this.familyName = familyName;
 			this.givenName = givenName;
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
+			_strategy = CreateStrategy();
 		}
 
 		private PersonNameStrategy CreateStrategy()

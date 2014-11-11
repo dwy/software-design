@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Person
 {
 	public abstract class PersonNameStrategy
 	{
-		protected Person _person;
-		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		protected readonly Person _person;
 
-		public PersonNameStrategy(Person person)
+		protected PersonNameStrategy(Person person)
 		{
 			_person = person;
 		}
@@ -23,13 +21,6 @@ namespace Person
 				surname = _person.FamilyName.ToUpperInvariant();
 			}
 			return surname;
-		}
-
-		protected bool IsSurnameFirst()
-		{
-			if (!_person.OlympicMode)
-				return false;
-			return surnameFirst.Contains(_person.Nationality);
 		}
 	}
 }

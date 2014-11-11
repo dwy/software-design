@@ -11,9 +11,6 @@ namespace Person
 		public override String NameString()
 		{
 			var surname = GetSurname();
-			if (IsSurnameFirst())
-				return surname + " " + _person.GivenName;
-			
 			return _person.GivenName + " " + surname;
 		}
 	}
