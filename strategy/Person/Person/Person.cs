@@ -30,16 +30,10 @@ namespace Person
 		{
 			if (OlympicMode)
 			{
-				return new OlympicPersonNameStrategy(this, capitalizeSurname, IsSurnameFirst(nationality));
+				return new OlympicPersonNameStrategy(capitalizeSurname, IsSurnameFirst(nationality));
 			}
 
-			return new DefaultPersonNameStrategy(this, capitalizeSurname);
-		}
-
-		public string FamilyName
-		{
-			set { familyName = value; }
-			get { return familyName; }
+			return new DefaultPersonNameStrategy(capitalizeSurname);
 		}
 
 		public string GivenName
@@ -48,19 +42,7 @@ namespace Person
 			get { return givenName; }
 		}
 
-		public string Nationality
-		{
-			set { nationality = value; }
-			get { return nationality; }
-		}
-
-		public bool CapitalizeSurname
-		{
-			set { capitalizeSurname = value; }
-			get { return capitalizeSurname; }
-		}
-
-		public bool OlympicMode
+		private bool OlympicMode
 		{
 			set { olympicMode = value; }
 			get { return olympicMode; }

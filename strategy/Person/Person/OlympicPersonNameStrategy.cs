@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Person
+﻿namespace Person
 {
 	public class OlympicPersonNameStrategy : PersonNameStrategy
 
 	{
 		private readonly bool _isSurnameFirst;
 
-		public OlympicPersonNameStrategy(Person person, bool capitalizeSurname, bool isSurnameFirst) : base(person, capitalizeSurname)
+		public OlympicPersonNameStrategy(bool capitalizeSurname, bool isSurnameFirst) : base(capitalizeSurname)
 		{
 			_isSurnameFirst = isSurnameFirst;
 		}

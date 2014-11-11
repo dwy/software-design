@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Person
 {
 	public abstract class PersonNameStrategy
 	{
-		protected readonly Person _person;
 		private bool _capitalizeSurname;
 
-		protected PersonNameStrategy(Person person, bool capitalizeSurname)
+		protected PersonNameStrategy(bool capitalizeSurname)
 		{
-			_person = person;
 			_capitalizeSurname = capitalizeSurname;
 		}
 

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Person
+﻿namespace Person
 {
 	public class DefaultPersonNameStrategy : PersonNameStrategy
 	{
-		public DefaultPersonNameStrategy(Person person, bool capitalizeSurname) : base(person, capitalizeSurname)
+		public DefaultPersonNameStrategy(bool capitalizeSurname) : base(capitalizeSurname)
 		{
 		}
 
