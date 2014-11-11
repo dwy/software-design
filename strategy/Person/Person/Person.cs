@@ -12,6 +12,7 @@ namespace Person
 		private bool olympicMode;
 
 		private readonly PersonNameStrategy _strategy;
+		public static readonly List<String> SurnameFirst = new List<String> {"CHN", "KOR"};
 
 
 		public Person(String familyName, String givenName, String nationality,
@@ -29,7 +30,7 @@ namespace Person
 		{
 			if (OlympicMode)
 			{
-				return new OlympicPersonNameStrategy(this);
+				return new OlympicPersonNameStrategy(this, nationality);
 			}
 
 			return new DefaultPersonNameStrategy(this);
@@ -68,6 +69,11 @@ namespace Person
 		public override string ToString()
 		{
 			return _strategy.NameString();
+		}
+
+		public static bool IsSurnameFirst(string nationality)
+		{
+			return SurnameFirst.Contains(nationality);
 		}
 	}
 }

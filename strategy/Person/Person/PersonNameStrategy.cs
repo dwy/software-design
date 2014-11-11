@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Person
 {
 	public abstract class PersonNameStrategy
 	{
 		protected readonly Person _person;
+		private bool _capitalizeSurname;
 
 		protected PersonNameStrategy(Person person)
 		{
 			_person = person;
+			_capitalizeSurname = _person.CapitalizeSurname;
 		}
 
 		public abstract String NameString();
@@ -16,7 +19,7 @@ namespace Person
 		protected string GetSurname(string familyName)
 		{
 			String surname = familyName;
-			if (_person.CapitalizeSurname)
+			if (_capitalizeSurname)
 			{
 				surname = familyName.ToUpperInvariant();
 			}

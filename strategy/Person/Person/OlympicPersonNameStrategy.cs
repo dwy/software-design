@@ -6,12 +6,11 @@ namespace Person
 	public class OlympicPersonNameStrategy : PersonNameStrategy
 
 	{
-		private static readonly List<String> surnameFirst = new List<String> {"CHN", "KOR"};
-		private bool _isSurnameFirst;
+		private readonly bool _isSurnameFirst;
 
-		public OlympicPersonNameStrategy(Person person) : base(person)
+		public OlympicPersonNameStrategy(Person person, string nationality) : base(person)
 		{
-			_isSurnameFirst = IsSurnameFirst(_person.Nationality);
+			_isSurnameFirst = Person.IsSurnameFirst(nationality);
 		}
 
 		public override String NameString()
@@ -22,11 +21,6 @@ namespace Person
 				return surname + " " + givenName;
 			
 			return givenName + " " + surname;
-		}
-
-		private bool IsSurnameFirst(string nationality)
-		{
-			return surnameFirst.Contains(nationality);
 		}
 	}
 }
