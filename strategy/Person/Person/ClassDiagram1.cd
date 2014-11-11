@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Person.DefaultPersonNameStrategy">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DefaultPersonNameStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Person.OlympicPersonNameStrategy">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OlympicPersonNameStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Person.Person">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAMCAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_strategy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Person.PersonNameStrategy">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>PersonNameStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Person.PersonNameStrategyFactory">
+    <Position X="5" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAACAAAAAAAAAA=</HashCode>
+      <FileName>PersonNameStrategyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Person.PersonTest" Collapsed="true">
+    <Position X="7.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAgAAAAAAAABABgAQAAAA=</HashCode>
+      <FileName>PersonTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
