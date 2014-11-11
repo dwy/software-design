@@ -30,10 +30,10 @@ namespace Person
 		{
 			if (OlympicMode)
 			{
-				return new OlympicPersonNameStrategy(this, Person.IsSurnameFirst(nationality));
+				return new OlympicPersonNameStrategy(this, capitalizeSurname, IsSurnameFirst(nationality));
 			}
 
-			return new DefaultPersonNameStrategy(this);
+			return new DefaultPersonNameStrategy(this, capitalizeSurname);
 		}
 
 		public string FamilyName

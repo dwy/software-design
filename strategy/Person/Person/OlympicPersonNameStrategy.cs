@@ -8,7 +8,7 @@ namespace Person
 	{
 		private readonly bool _isSurnameFirst;
 
-		public OlympicPersonNameStrategy(Person person, bool isSurnameFirst) : base(person)
+		public OlympicPersonNameStrategy(Person person, bool capitalizeSurname, bool isSurnameFirst) : base(person, capitalizeSurname)
 		{
 			_isSurnameFirst = isSurnameFirst;
 		}

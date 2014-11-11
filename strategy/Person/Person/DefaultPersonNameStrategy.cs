@@ -4,7 +4,7 @@ namespace Person
 {
 	public class DefaultPersonNameStrategy : PersonNameStrategy
 	{
-		public DefaultPersonNameStrategy(Person person) : base(person)
+		public DefaultPersonNameStrategy(Person person, bool capitalizeSurname) : base(person, capitalizeSurname)
 		{
 		}
 

@@ -8,10 +8,10 @@ namespace Person
 		protected readonly Person _person;
 		private bool _capitalizeSurname;
 
-		protected PersonNameStrategy(Person person)
+		protected PersonNameStrategy(Person person, bool capitalizeSurname)
 		{
 			_person = person;
-			_capitalizeSurname = _person.CapitalizeSurname;
+			_capitalizeSurname = capitalizeSurname;
 		}
 
 		public abstract string NameString(string givenName, string familyName);
