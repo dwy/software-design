@@ -1,7 +1,6 @@
 ﻿namespace Person
 {
 	public class OlympicPersonNameStrategy : PersonNameStrategy
-
 	{
 		private readonly bool _isSurnameFirst;
 
