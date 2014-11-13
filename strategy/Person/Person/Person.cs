@@ -23,7 +23,7 @@ namespace Person
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
-			_strategy = CreateStrategy();
+			_strategy = CreateStrategy(IsSurnameFirst(), this.capitalizeSurname, this.olympicMode);
 		}
 
 		public override string ToString()
@@ -31,13 +31,13 @@ namespace Person
 			return _strategy.NameString(givenName, familyName);
 		}
 
-		private PersonNameStrategy CreateStrategy()
+		private static PersonNameStrategy CreateStrategy(bool isSurnameFirst, bool capitaliseSurname, bool olympicMode)
 		{
 			if (olympicMode)
 			{
-				return new OlympicPersonNameStrategy(capitalizeSurname, IsSurnameFirst());
+				return new OlympicPersonNameStrategy(capitaliseSurname, isSurnameFirst);
 			}
-			return new DefaultPersonNameStrategy(capitalizeSurname, IsSurnameFirst());
+			return new DefaultPersonNameStrategy(capitaliseSurname, isSurnameFirst);
 		}
 
 		private bool IsSurnameFirst()
