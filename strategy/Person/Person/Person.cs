@@ -23,7 +23,7 @@ namespace Person
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
-			_strategy = CreateStrategy(IsSurnameFirst(), this.capitalizeSurname, this.olympicMode);
+			_strategy = CreateStrategy(IsSurnameFirst(this.nationality, this.olympicMode), this.capitalizeSurname, this.olympicMode);
 		}
 
 		public override string ToString()
@@ -40,7 +40,7 @@ namespace Person
 			return new DefaultPersonNameStrategy(capitaliseSurname, isSurnameFirst);
 		}
 
-		private bool IsSurnameFirst()
+		private static bool IsSurnameFirst(string nationality, bool olympicMode)
 		{
 			if (!olympicMode)
 				return false;
