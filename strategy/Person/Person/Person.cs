@@ -12,26 +12,23 @@ namespace Person
 		private bool olympicMode;
 
 		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		private PersonNameStrategy _strategy;
 
-
-		public Person(String familyName, String givenName, String nationality)
-			: this(familyName, givenName, nationality, false, false)
-		{
-		}
 
 		public Person(String familyName, String givenName, String nationality,
-			bool olympicMode, bool capitalizeSurname)
+			bool olympicMode = false, bool capitalizeSurname = false)
 		{
 			this.familyName = familyName;
 			this.givenName = givenName;
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
+			_strategy = CreateStrategy();
 		}
 
 		public override string ToString()
 		{
-			return CreateStrategy().NameString(givenName, familyName);
+			return _strategy.NameString(givenName, familyName);
 		}
 
 		private PersonNameStrategy CreateStrategy()
