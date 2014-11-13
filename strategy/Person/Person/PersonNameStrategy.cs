@@ -1,16 +1,9 @@
-﻿using System;
-
-namespace Person
+﻿namespace Person
 {
 	public class PersonNameStrategy
 	{
-		private bool _capitaliseSurname;
-		private bool _isSurnameFirst;
-
-		public PersonNameStrategy()
-		{
-			
-		}
+		private readonly bool _capitaliseSurname;
+		private readonly bool _isSurnameFirst;
 
 		public PersonNameStrategy(bool capitaliseSurname, bool isSurnameFirst)
 		{
@@ -27,7 +20,7 @@ namespace Person
 			return givenName + " " + familyName;
 		}
 
-		private string GetSurname(string surname)
+		protected string GetSurname(string surname)
 		{
 			if (_capitaliseSurname)
 			{
