@@ -36,7 +36,11 @@ namespace Person
 
 		private PersonNameStrategy CreateStrategy()
 		{
-			return new PersonNameStrategy(capitalizeSurname, IsSurnameFirst());
+			if (olympicMode)
+			{
+				return new OlympicPersonNameStrategy(capitalizeSurname, IsSurnameFirst());
+			}
+			return new DefaultPersonNameStrategy(capitalizeSurname, IsSurnameFirst());
 		}
 
 		private bool IsSurnameFirst()
