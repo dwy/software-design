@@ -18,17 +18,22 @@ namespace Person
 			_isSurnameFirst = isSurnameFirst;
 		}
 
-		public string NameString(string givenName1, string surname1)
+		public string NameString(string givenName, string surname)
 		{
-			String surname = surname1;
+			var familyName = GetSurname(surname);
+			if (_isSurnameFirst)
+				return familyName + " " + givenName;
+			
+			return givenName + " " + familyName;
+		}
+
+		private string GetSurname(string surname)
+		{
 			if (_capitaliseSurname)
 			{
-				surname = surname1.ToUpperInvariant();
+				return surname.ToUpperInvariant();
 			}
-			if (_isSurnameFirst)
-				return surname + " " + givenName1;
-			
-			return givenName1 + " " + surname;
+			return surname;
 		}
 	}
 }
