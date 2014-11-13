@@ -31,20 +31,20 @@ namespace Person
 
 		public override string ToString()
 		{
-			return NameString();
+			return NameString(givenName, IsSurnameFirst(), capitalizeSurname, familyName);
 		}
 
-		private String NameString()
+		private static String NameString(string givenName1, bool isSurnameFirst, bool capitaliseSurname, string surname1)
 		{
-			String surname = familyName;
-			if (capitalizeSurname)
+			String surname = surname1;
+			if (capitaliseSurname)
 			{
-				surname = familyName.ToUpperInvariant();
+				surname = surname1.ToUpperInvariant();
 			}
-			if (IsSurnameFirst())
-				return surname + " " + givenName;
+			if (isSurnameFirst)
+				return surname + " " + givenName1;
 			
-			return givenName + " " + surname;
+			return givenName1 + " " + surname;
 		}
 
 		private bool IsSurnameFirst()
