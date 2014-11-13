@@ -11,7 +11,6 @@ namespace Person
 		private bool capitalizeSurname;
 		private bool olympicMode;
 
-		private static List<String> surnameFirst = new List<String> {"CHN", "KOR"};
 		private PersonNameStrategy _strategy;
 
 
@@ -23,29 +22,12 @@ namespace Person
 			this.nationality = nationality;
 			this.capitalizeSurname = capitalizeSurname;
 			this.olympicMode = olympicMode;
-			_strategy = CreateStrategy(capitalizeSurname, olympicMode, nationality);
+			_strategy = PersonNameStrategyFactory.Create(capitalizeSurname, olympicMode, nationality);
 		}
 
 		public override string ToString()
 		{
 			return _strategy.NameString(givenName, familyName);
-		}
-
-		private static PersonNameStrategy CreateStrategy(bool capitaliseSurname, bool olympicMode, string nationality)
-		{
-			bool isSurnameFirst = IsSurnameFirst(nationality, olympicMode);
-			if (olympicMode)
-			{
-				return new OlympicPersonNameStrategy(capitaliseSurname, isSurnameFirst);
-			}
-			return new DefaultPersonNameStrategy(capitaliseSurname, isSurnameFirst);
-		}
-
-		private static bool IsSurnameFirst(string nationality, bool olympicMode)
-		{
-			if (!olympicMode)
-				return false;
-			return surnameFirst.Contains(nationality);
 		}
 	}
 }
