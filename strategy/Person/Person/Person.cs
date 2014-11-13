@@ -31,7 +31,7 @@ namespace Person
 
 		public override string ToString()
 		{
-			return new PersonNameStrategy().NameString(givenName, IsSurnameFirst(), capitalizeSurname, familyName);
+			return new PersonNameStrategy(capitalizeSurname, IsSurnameFirst()).NameString(givenName, IsSurnameFirst(), capitalizeSurname, familyName);
 		}
 
 		private bool IsSurnameFirst()
