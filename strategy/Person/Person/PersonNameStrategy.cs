@@ -18,16 +18,14 @@ namespace Person
 			_isSurnameFirst = isSurnameFirst;
 		}
 
-		public string NameString(string givenName1, bool isSurnameFirst, bool capitaliseSurname, string surname1)
+		public string NameString(string givenName1, string surname1)
 		{
-			_isSurnameFirst = isSurnameFirst;
-			_capitaliseSurname = capitaliseSurname;
 			String surname = surname1;
-			if (capitaliseSurname)
+			if (_capitaliseSurname)
 			{
 				surname = surname1.ToUpperInvariant();
 			}
-			if (isSurnameFirst)
+			if (_isSurnameFirst)
 				return surname + " " + givenName1;
 			
 			return givenName1 + " " + surname;
