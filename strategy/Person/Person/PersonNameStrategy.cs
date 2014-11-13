@@ -1,24 +1,17 @@
 ﻿namespace Person
 {
-	public class PersonNameStrategy
+	public abstract class PersonNameStrategy
 	{
 		private readonly bool _capitaliseSurname;
-		private readonly bool _isSurnameFirst;
+		protected readonly bool _isSurnameFirst;
 
-		public PersonNameStrategy(bool capitaliseSurname, bool isSurnameFirst)
+		protected PersonNameStrategy(bool capitaliseSurname, bool isSurnameFirst)
 		{
 			_capitaliseSurname = capitaliseSurname;
 			_isSurnameFirst = isSurnameFirst;
 		}
 
-		public string NameString(string givenName, string surname)
-		{
-			var familyName = GetSurname(surname);
-			if (_isSurnameFirst)
-				return familyName + " " + givenName;
-			
-			return givenName + " " + familyName;
-		}
+		public abstract string NameString(string givenName, string surname);
 
 		protected string GetSurname(string surname)
 		{
