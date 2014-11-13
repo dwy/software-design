@@ -5,7 +5,7 @@ namespace Person
 {
 	public static class PersonNameStrategyFactory
 	{
-		private static readonly List<String> surnameFirst = new List<String> {"CHN", "KOR"};
+		private static readonly List<String> SurnameFirst = new List<String> {"CHN", "KOR"};
 
 		public static PersonNameStrategy Create(bool capitaliseSurname, bool olympicMode, string nationality)
 		{
@@ -21,7 +21,7 @@ namespace Person
 		{
 			if (!olympicMode)
 				return false;
-			return surnameFirst.Contains(nationality);
+			return SurnameFirst.Contains(nationality);
 		}
 	}
 }
