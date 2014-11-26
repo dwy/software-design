@@ -10,6 +10,7 @@ namespace Person
 
 		private readonly bool _capitaliseSurname;
 		private readonly bool _isSurnameFirst;
+		private static readonly List<string> SurnameFirst = new List<String> {"CHN", "KOR"};
 
 
 		public Person(String familyName, String givenName, String nationality,
@@ -18,7 +19,7 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 			_capitaliseSurname = capitalizeSurname;
-			_isSurnameFirst = olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality);
+			_isSurnameFirst = olympicMode && SurnameFirst.Contains(nationality);
 		}
 
 		public override string ToString()
