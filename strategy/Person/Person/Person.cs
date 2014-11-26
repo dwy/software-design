@@ -9,7 +9,6 @@ namespace Person
 		private readonly String _givenName;
 
 		private readonly bool _capitaliseSurname;
-		private readonly bool _isSurnameFirst;
 		private static readonly List<string> SurnameFirst = new List<String> {"CHN", "KOR"};
 		private string _nationality;
 		private bool _olympicMode;
@@ -23,10 +22,9 @@ namespace Person
 			_capitaliseSurname = capitalizeSurname;
 			_nationality = nationality;
 			_olympicMode = olympicMode;
-			_isSurnameFirst = IsSurnameFirst(_nationality, _olympicMode);
 		}
 
-		private static bool IsSurnameFirst(string nationality, bool olympicMode)
+		private static bool IsSurnameFirst(Person person, string nationality, bool olympicMode)
 		{
 			return olympicMode && SurnameFirst.Contains(nationality);
 		}
@@ -48,7 +46,7 @@ namespace Person
 		private string NameString(string givenName, string surname)
 		{
 			var familyName = GetSurname(surname);
-			if (_isSurnameFirst)
+			if (IsSurnameFirst(this, _nationality, _olympicMode))
 				return familyName + " " + givenName;
 			
 			return givenName + " " + familyName;
