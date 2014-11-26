@@ -11,8 +11,6 @@
 			_isSurnameFirst = isSurnameFirst;
 		}
 
-		public abstract string NameString(string givenName, string surname);
-
 		protected string GetSurname(string surname)
 		{
 			if (_capitaliseSurname)
@@ -20,6 +18,15 @@
 				return surname.ToUpperInvariant();
 			}
 			return surname;
+		}
+
+		public virtual string NameString(string givenName, string surname)
+		{
+			var familyName = GetSurname(surname);
+			if (_isSurnameFirst)
+				return familyName + " " + givenName;
+			
+			return givenName + " " + familyName;
 		}
 	}
 }
