@@ -19,7 +19,12 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 			_capitaliseSurname = capitalizeSurname;
-			_isSurnameFirst = olympicMode && SurnameFirst.Contains(nationality);
+			_isSurnameFirst = IsSurnameFirst(nationality, olympicMode);
+		}
+
+		private static bool IsSurnameFirst(string nationality, bool olympicMode)
+		{
+			return olympicMode && SurnameFirst.Contains(nationality);
 		}
 
 		public override string ToString()
