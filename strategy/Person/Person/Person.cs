@@ -11,6 +11,8 @@ namespace Person
 		private readonly bool _capitaliseSurname;
 		private readonly bool _isSurnameFirst;
 		private static readonly List<string> SurnameFirst = new List<String> {"CHN", "KOR"};
+		private string _nationality;
+		private bool _olympicMode;
 
 
 		public Person(String familyName, String givenName, String nationality,
@@ -19,7 +21,9 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 			_capitaliseSurname = capitalizeSurname;
-			_isSurnameFirst = IsSurnameFirst(nationality, olympicMode);
+			_nationality = nationality;
+			_olympicMode = olympicMode;
+			_isSurnameFirst = IsSurnameFirst(_nationality, _olympicMode);
 		}
 
 		private static bool IsSurnameFirst(string nationality, bool olympicMode)
