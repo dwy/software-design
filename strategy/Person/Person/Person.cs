@@ -36,7 +36,12 @@ namespace Person
 
 		private string NameString()
 		{
-			var familyName = _capitaliseSurname ? _familyName.ToUpperInvariant() : _familyName;
+			string familyName = _familyName;
+			if (_capitaliseSurname)
+			{
+				familyName = _familyName.ToUpperInvariant();
+			}
+
 			if (IsSurnameFirst())
 				return familyName + " " + _givenName;
 			
