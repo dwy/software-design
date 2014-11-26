@@ -36,11 +36,7 @@ namespace Person
 
 		private string GetSurname()
 		{
-			if (_capitaliseSurname)
-			{
-				return _familyName.ToUpperInvariant();
-			}
-			return _familyName;
+			return _capitaliseSurname ? _familyName.ToUpperInvariant() : _familyName;
 		}
 
 		private string NameString()
