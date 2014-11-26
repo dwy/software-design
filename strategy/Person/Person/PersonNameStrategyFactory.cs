@@ -9,19 +9,12 @@ namespace Person
 
 		public static PersonNameStrategy Create(bool capitaliseSurname, bool olympicMode, string nationality)
 		{
-			bool isSurnameFirst = IsSurnameFirst(nationality, olympicMode);
+			bool isSurnameFirst = olympicMode && SurnameFirst.Contains(nationality);
 			if (olympicMode)
 			{
 				return new OlympicPersonNameStrategy(capitaliseSurname, isSurnameFirst);
 			}
 			return new DefaultPersonNameStrategy(capitaliseSurname, isSurnameFirst);
-		}
-
-		private static bool IsSurnameFirst(string nationality, bool olympicMode)
-		{
-			if (!olympicMode)
-				return false;
-			return SurnameFirst.Contains(nationality);
 		}
 	}
 }
