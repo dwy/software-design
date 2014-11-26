@@ -24,7 +24,7 @@ namespace Person
 			_olympicMode = olympicMode;
 		}
 
-		private static bool IsSurnameFirst(Person person, string nationality, bool olympicMode)
+		private bool IsSurnameFirst(string nationality, bool olympicMode)
 		{
 			return olympicMode && SurnameFirst.Contains(nationality);
 		}
@@ -46,7 +46,7 @@ namespace Person
 		private string NameString(string givenName, string surname)
 		{
 			var familyName = GetSurname(surname);
-			if (IsSurnameFirst(this, _nationality, _olympicMode))
+			if (IsSurnameFirst(_nationality, _olympicMode))
 				return familyName + " " + givenName;
 			
 			return givenName + " " + familyName;
