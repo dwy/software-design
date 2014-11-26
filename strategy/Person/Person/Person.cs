@@ -9,7 +9,7 @@ namespace Person
 		private readonly String _givenName;
 
 		private readonly bool _capitaliseSurname;
-		protected readonly bool _isSurnameFirst;
+		private readonly bool _isSurnameFirst;
 
 
 		public Person(String familyName, String givenName, String nationality,
@@ -26,7 +26,7 @@ namespace Person
 			return NameString(_givenName, _familyName);
 		}
 
-		protected string GetSurname(string surname)
+		private string GetSurname(string surname)
 		{
 			if (_capitaliseSurname)
 			{
@@ -35,7 +35,7 @@ namespace Person
 			return surname;
 		}
 
-		public virtual string NameString(string givenName, string surname)
+		private string NameString(string givenName, string surname)
 		{
 			var familyName = GetSurname(surname);
 			if (_isSurnameFirst)
