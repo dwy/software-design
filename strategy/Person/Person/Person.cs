@@ -8,7 +8,8 @@ namespace Person
 		private readonly String _familyName;
 		private readonly String _givenName;
 
-		private readonly PersonNameStrategy _strategy;
+		private readonly bool _capitaliseSurname;
+		protected readonly bool _isSurnameFirst;
 
 
 		public Person(String familyName, String givenName, String nationality,
@@ -16,12 +17,31 @@ namespace Person
 		{
 			_familyName = familyName;
 			_givenName = givenName;
-			_strategy = new PersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality));
+			_capitaliseSurname = capitalizeSurname;
+			_isSurnameFirst = olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality);
 		}
 
 		public override string ToString()
 		{
-			return _strategy.NameString(_givenName, _familyName);
+			return NameString(_givenName, _familyName);
+		}
+
+		protected string GetSurname(string surname)
+		{
+			if (_capitaliseSurname)
+			{
+				return surname.ToUpperInvariant();
+			}
+			return surname;
+		}
+
+		public virtual string NameString(string givenName, string surname)
+		{
+			var familyName = GetSurname(surname);
+			if (_isSurnameFirst)
+				return familyName + " " + givenName;
+			
+			return givenName + " " + familyName;
 		}
 	}
 }
