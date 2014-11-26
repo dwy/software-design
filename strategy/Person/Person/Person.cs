@@ -24,9 +24,9 @@ namespace Person
 			_olympicMode = olympicMode;
 		}
 
-		private bool IsSurnameFirst(string nationality, bool olympicMode)
+		private bool IsSurnameFirst()
 		{
-			return olympicMode && SurnameFirst.Contains(nationality);
+			return _olympicMode && SurnameFirst.Contains(_nationality);
 		}
 
 		public override string ToString()
@@ -46,7 +46,7 @@ namespace Person
 		private string NameString(string givenName, string surname)
 		{
 			var familyName = GetSurname(surname);
-			if (IsSurnameFirst(_nationality, _olympicMode))
+			if (IsSurnameFirst())
 				return familyName + " " + givenName;
 			
 			return givenName + " " + familyName;
