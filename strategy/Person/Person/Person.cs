@@ -31,7 +31,7 @@ namespace Person
 
 		public override string ToString()
 		{
-			return NameString(_givenName, _familyName);
+			return NameString();
 		}
 
 		private string GetSurname(string surname)
@@ -43,13 +43,13 @@ namespace Person
 			return surname;
 		}
 
-		private string NameString(string givenName, string surname)
+		private string NameString()
 		{
-			var familyName = GetSurname(surname);
+			var familyName = GetSurname(_familyName);
 			if (IsSurnameFirst())
-				return familyName + " " + givenName;
+				return familyName + " " + _givenName;
 			
-			return givenName + " " + familyName;
+			return _givenName + " " + familyName;
 		}
 	}
 }
