@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Person
 {
@@ -15,7 +16,10 @@ namespace Person
 		{
 			_familyName = familyName;
 			_givenName = givenName;
-			_strategy = PersonNameStrategyFactory.Create(capitalizeSurname, olympicMode, nationality);
+			_strategy = olympicMode
+				? (PersonNameStrategy)
+					new OlympicPersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality))
+				: new DefaultPersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality));
 		}
 
 		public override string ToString()
