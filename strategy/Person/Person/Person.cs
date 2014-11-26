@@ -17,8 +17,7 @@ namespace Person
 			_familyName = familyName;
 			_givenName = givenName;
 			_strategy = olympicMode
-				? (PersonNameStrategy)
-					new OlympicPersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality))
+				? new PersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality))
 				: new DefaultPersonNameStrategy(capitalizeSurname, olympicMode && new List<String> {"CHN", "KOR"}.Contains(nationality));
 		}
 

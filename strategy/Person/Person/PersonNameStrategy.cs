@@ -1,11 +1,11 @@
 ﻿namespace Person
 {
-	public abstract class PersonNameStrategy
+	public class PersonNameStrategy
 	{
 		private readonly bool _capitaliseSurname;
 		protected readonly bool _isSurnameFirst;
 
-		protected PersonNameStrategy(bool capitaliseSurname, bool isSurnameFirst)
+		public PersonNameStrategy(bool capitaliseSurname, bool isSurnameFirst)
 		{
 			_capitaliseSurname = capitaliseSurname;
 			_isSurnameFirst = isSurnameFirst;
