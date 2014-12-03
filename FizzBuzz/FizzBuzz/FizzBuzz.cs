@@ -13,7 +13,7 @@ namespace FizzBuzz
 
 		private static string GetNumberString(int n)
 		{
-			if (IsDivisibleBy(n, 3) && IsDivisibleBy(n, 5))
+			if (IsDivisibleBy(n, 3, 5))
 			{
 				return "Fizz Buzz";
 			}
@@ -26,6 +26,11 @@ namespace FizzBuzz
 				return "Buzz";
 			}
 			return "" + n;
+		}
+
+		private static bool IsDivisibleBy(int n, params int[] divisors)
+		{
+			return divisors.All(d => IsDivisibleBy(n, d));
 		}
 
 		private static bool IsDivisibleBy(int n, int divisor)
