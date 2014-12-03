@@ -32,6 +32,13 @@ namespace FizzBuzz
 			Assert.AreEqual("1, 2, Fizz", numbers);
 		}
 
+		[Test]
+		public void MultipleOfFive_DisplaysBuzz()
+		{
+			string numbers = FizzBuzz(5);
+
+			Assert.AreEqual("1, 2, Fizz, 4, Buzz", numbers);
+		}
 
 		private static string FizzBuzz(int count)
 		{
@@ -44,6 +51,10 @@ namespace FizzBuzz
 			if (n % 3 == 0)
 			{
 				return "Fizz";
+			}
+			if (n % 5 == 0)
+			{
+				return "Buzz";
 			}
 			return "" + n;
 		}
