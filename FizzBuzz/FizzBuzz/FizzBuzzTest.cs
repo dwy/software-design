@@ -11,7 +11,7 @@ namespace FizzBuzz
 		[Test]
 		public void SingleNormalNumber_NumberIsPrinted()
 		{
-			string numbers = FizzBuzz(1);
+			string numbers = FizzBuzz.Get(1);
 
 			Assert.AreEqual("1", numbers);
 		}
@@ -19,7 +19,7 @@ namespace FizzBuzz
 		[Test]
 		public void NormalNumberSequence_NumbersArePrinted()
 		{
-			string numbers = FizzBuzz(2);
+			string numbers = FizzBuzz.Get(2);
 
 			Assert.AreEqual("1, 2", numbers);
 		}
@@ -27,7 +27,7 @@ namespace FizzBuzz
 		[Test]
 		public void MultipleOfThree_DisplaysFizz()
 		{
-			string numbers = FizzBuzz(3);
+			string numbers = FizzBuzz.Get(3);
 
 			Assert.AreEqual("1, 2, Fizz", numbers);
 		}
@@ -35,7 +35,7 @@ namespace FizzBuzz
 		[Test]
 		public void MultipleOfFive_DisplaysBuzz()
 		{
-			string numbers = FizzBuzz(5);
+			string numbers = FizzBuzz.Get(5);
 
 			Assert.AreEqual("1, 2, Fizz, 4, Buzz", numbers);
 		}
@@ -43,32 +43,9 @@ namespace FizzBuzz
 		[Test]
 		public void MultipleOfFifteen_DisplaysFizzBuzz()
 		{
-			string numbers = FizzBuzz(15);
+			string numbers = FizzBuzz.Get(15);
 
 			Assert.AreEqual("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz", numbers);
-		}
-
-		private static string FizzBuzz(int count)
-		{
-			IEnumerable<string> numbers = Enumerable.Range(1, count).Select(GetNumberString);
-			return string.Join(", ", numbers);
-		}
-
-		private static string GetNumberString(int n)
-		{
-			if (n % 3 == 0 && n % 5 == 0)
-			{
-				return "Fizz Buzz";
-			}
-			if (n % 3 == 0)
-			{
-				return "Fizz";
-			}
-			if (n % 5 == 0)
-			{
-				return "Buzz";
-			}
-			return "" + n;
 		}
 	}
 }
