@@ -1,0 +1,3 @@
+[submodule "dependency-injection"]
+	path = dependency-injection
+	url = https://github.com/dwy/dependency-injection
