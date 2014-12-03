@@ -13,19 +13,24 @@ namespace FizzBuzz
 
 		private static string GetNumberString(int n)
 		{
-			if (n % 3 == 0 && n % 5 == 0)
+			if (IsDivisibleBy(n, 3) && IsDivisibleBy(n, 5))
 			{
 				return "Fizz Buzz";
 			}
-			if (n % 3 == 0)
+			if (IsDivisibleBy(n, 3))
 			{
 				return "Fizz";
 			}
-			if (n % 5 == 0)
+			if (IsDivisibleBy(n, 5))
 			{
 				return "Buzz";
 			}
 			return "" + n;
+		}
+
+		private static bool IsDivisibleBy(int n, int divisor)
+		{
+			return n % divisor == 0;
 		}
 	}
 }
