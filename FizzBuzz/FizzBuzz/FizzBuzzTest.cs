@@ -47,5 +47,14 @@ namespace FizzBuzz
 
 			Assert.AreEqual("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz", numbers);
 		}
+
+		[Test]
+		public void LongNumberSequence_DisplaysFizzBuzzCorrectly()
+		{
+			string numbers = FizzBuzz.Get(30);
+
+			Assert.AreEqual("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz, " +
+			                "16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, Fizz Buzz", numbers);
+		}
 	}
 }
