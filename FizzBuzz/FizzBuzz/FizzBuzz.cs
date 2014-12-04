@@ -28,9 +28,9 @@ namespace FizzBuzz
 		private static string GetNumberString(int n)
 		{
 			string numberString;
-			numberString = NumberStringForRemaindersOf15.TryGetValue(n % 15, out numberString) ? numberString : "" + n;
-
-			return numberString;
+			NumberStringForRemaindersOf15.TryGetValue(n % 15, out numberString);
+			// take advantage of the fact that TryGetValue will assign default(T) if key is not found
+			return numberString ?? "" + n;
 		}
 	}
 }
