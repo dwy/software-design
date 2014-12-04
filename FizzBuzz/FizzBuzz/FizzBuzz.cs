@@ -5,6 +5,20 @@ namespace FizzBuzz
 {
 	public static class FizzBuzz
 	{
+		/// <summary>
+		/// Map the remainder of n modulo 15 to the corresponding text.
+		/// </summary>
+		private static readonly Dictionary<int, string> NumberStringForRemaindersOf15 = new Dictionary<int, string>
+		{
+			{3, "Fizz"},
+			{5, "Buzz"},
+			{6, "Fizz"},
+			{9, "Fizz"},
+			{10, "Buzz"},
+			{12, "Fizz"},
+			{0, "Fizz Buzz"},
+		};
+
 		public static string Get(int count)
 		{
 			IEnumerable<string> numbers = Enumerable.Range(1, count).Select(GetNumberString);
@@ -13,29 +27,10 @@ namespace FizzBuzz
 
 		private static string GetNumberString(int n)
 		{
-			if (IsDivisibleBy(n, 3, 5))
-			{
-				return "Fizz Buzz";
-			}
-			if (IsDivisibleBy(n, 3))
-			{
-				return "Fizz";
-			}
-			if (IsDivisibleBy(n, 5))
-			{
-				return "Buzz";
-			}
-			return "" + n;
-		}
+			string numberString;
+			numberString = NumberStringForRemaindersOf15.TryGetValue(n % 15, out numberString) ? numberString : "" + n;
 
-		private static bool IsDivisibleBy(int n, params int[] divisors)
-		{
-			return divisors.All(d => IsDivisibleBy(n, d));
-		}
-
-		private static bool IsDivisibleBy(int n, int divisor)
-		{
-			return n % divisor == 0;
+			return numberString;
 		}
 	}
 }
