@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace CommandLineVideoStore
@@ -86,12 +87,12 @@ namespace CommandLineVideoStore
                     frequentRenterPoints++;
                 }
                 // show figures for this rental
-                result += "\t" + movie[0] + "\t" + thisAmount.ToString("0.0") + "\n";
+                result += "\t" + movie[0] + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
             // add footer lines
-            result += "You owed " + totalAmount.ToString("0.0") + "\n";
+            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
