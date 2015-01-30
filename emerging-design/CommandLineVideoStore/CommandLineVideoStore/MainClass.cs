@@ -26,6 +26,7 @@ namespace CommandLineVideoStore
         {
             // read movies from file
             var movies = new List<string[]>();
+            var movies2 = new List<Movie>();
             using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             using (StreamReader reader = new StreamReader(bs))
@@ -37,7 +38,8 @@ namespace CommandLineVideoStore
                     string[] movie = line.Split(';');
                     var movie2 = new Movie(movie[0], movie[1], movieNumber);
                     movies.Add(movie);
-                    _out.WriteLine(movieNumber + ": " + movie[0]);
+                    movies2.Add(movie2);
+                    _out.WriteLine(movie2.Number + ": " + movie2.Name);
                     movieNumber++;
                 }
             }
