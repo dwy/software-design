@@ -35,6 +35,7 @@ namespace CommandLineVideoStore
                 {
                     string line = reader.ReadLine();
                     string[] movie = line.Split(';');
+                    var movie2 = new Movie();
                     movies.Add(movie);
                     _out.WriteLine(movieNumber + ": " + movie[0]);
                     movieNumber++;
