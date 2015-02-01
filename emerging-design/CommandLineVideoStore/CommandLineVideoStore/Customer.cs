@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CommandLineVideoStore
 {
@@ -21,6 +22,11 @@ namespace CommandLineVideoStore
         public List<Rental> Rentals
         {
             get { return _rentals; }
+        }
+
+        public decimal TotalAmount()
+        {
+            return Rentals.Sum(rental => rental.CalculateAmount());
         }
     }
 }

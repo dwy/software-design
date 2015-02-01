@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 
 namespace CommandLineVideoStore
 {
@@ -68,13 +67,8 @@ namespace CommandLineVideoStore
 
         private void PrintFooter(Customer customer)
         {
-            _out.WriteLine("You owed " + CalculateTotalAmount(customer).ToString("0.0", CultureInfo.InvariantCulture));
+            _out.WriteLine("You owed " + customer.TotalAmount().ToString("0.0", CultureInfo.InvariantCulture));
             _out.WriteLine("You earned " + CalculateFrequentRenterPoints(customer) + " frequent renter points");
-        }
-
-        private static decimal CalculateTotalAmount(Customer customer)
-        {
-            return customer.Rentals.Sum(rental => rental.CalculateAmount());
         }
 
         private static int CalculateFrequentRenterPoints(Customer customer)
