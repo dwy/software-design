@@ -35,7 +35,6 @@ namespace CommandLineVideoStore
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
             decimal totalAmount = 0;
-            int frequentRenterPoints = 0;
             string result = "Rental Record for " + customerName + "\n";
             var rentals = new List<Rental>();
             while (true)
@@ -50,27 +49,20 @@ namespace CommandLineVideoStore
 
                 decimal thisAmount = rental.CalculateAmount();
 
+                // show figures for this rental
+                result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                totalAmount += thisAmount;
+            }
+
+            int frequentRenterPoints = 0;
+            foreach (var rental in rentals)
+            {
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
                 if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
                 {
                     frequentRenterPoints++;
-                }
-                // show figures for this rental
-                result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-                totalAmount += thisAmount;
-            }
-
-            int frequentRenterPoints2 = 0;
-            foreach (var rental in rentals)
-            {
-                // add frequent renter points
-                frequentRenterPoints2++;
-                // add bonus for a two day new release rental
-                if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
-                {
-                    frequentRenterPoints2++;
                 }
             }
 
