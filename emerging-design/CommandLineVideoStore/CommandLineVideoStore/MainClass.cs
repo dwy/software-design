@@ -34,7 +34,6 @@ namespace CommandLineVideoStore
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
-            string result = "Rental Record for " + customerName + "\n";
             var rentals = new List<Rental>();
             string result2 = "Rental Record for " + customerName + "\n";
             while (true)
@@ -46,11 +45,6 @@ namespace CommandLineVideoStore
                 }
                 var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
-
-                decimal thisAmount = rental.CalculateAmount();
-
-                // show figures for this rental
-                result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
 
             foreach (var rental in rentals)
@@ -62,9 +56,9 @@ namespace CommandLineVideoStore
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
-            result += PrintFooter(totalAmount, frequentRenterPoints);
+            result2 += PrintFooter(totalAmount, frequentRenterPoints);
 
-            _out.Write(result);
+            _out.Write(result2);
         }
 
         private static string PrintFooter(decimal totalAmount, int frequentRenterPoints)
