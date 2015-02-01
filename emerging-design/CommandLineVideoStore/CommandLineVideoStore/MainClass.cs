@@ -31,6 +31,7 @@ namespace CommandLineVideoStore
             PrintMovies();
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
+            var customer = new Customer(customerName, rentals);
             string result = PrintRentalRecord(customerName, rentals);
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
