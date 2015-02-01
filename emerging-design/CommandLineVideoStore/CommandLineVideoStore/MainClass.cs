@@ -36,6 +36,7 @@ namespace CommandLineVideoStore
 
             string result = "Rental Record for " + customerName + "\n";
             var rentals = new List<Rental>();
+            string result2 = "Rental Record for " + customerName + "\n";
             while (true)
             {
                 string input = _in.ReadLine();
@@ -50,6 +51,12 @@ namespace CommandLineVideoStore
 
                 // show figures for this rental
                 result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+            }
+
+            foreach (var rental in rentals)
+            {
+                // show figures for this rental
+                result2 += "\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
 
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
