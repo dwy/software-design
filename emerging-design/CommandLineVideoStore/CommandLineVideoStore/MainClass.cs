@@ -24,26 +24,8 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            // read movies from file
-            var movies = new List<Movie>();
-            using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
-            using (BufferedStream bs = new BufferedStream(fs))
-            using (StreamReader reader = new StreamReader(bs))
-            {
-                int movieNumber = 0;
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] movieStrings = line.Split(';');
-                    var movie = new Movie(movieStrings[0], movieStrings[1], movieNumber);
-                    movies.Add(movie);
-                    movieNumber++;
-                }
-            }
-            foreach (var movie in movies)
-            {
-                _out.WriteLine(movie.Number + ": " + movie.Name);
-            }
+            List<Movie> movies = LoadMovies();
+            PrintMovies(movies);
 
             _out.Write("Enter customer name: ");
             string customerName = _in.ReadLine();
@@ -106,6 +88,34 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static List<Movie> LoadMovies()
+        {
+            var movies = new List<Movie>();
+            using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
+            using (BufferedStream bs = new BufferedStream(fs))
+            using (StreamReader reader = new StreamReader(bs))
+            {
+                int movieNumber = 0;
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] movieStrings = line.Split(';');
+                    var movie = new Movie(movieStrings[0], movieStrings[1], movieNumber);
+                    movies.Add(movie);
+                    movieNumber++;
+                }
+            }
+            return movies;
+        }
+
+        private void PrintMovies(List<Movie> movies)
+        {
+            foreach (var movie in movies)
+            {
+                _out.WriteLine(movie.Number + ": " + movie.Name);
+            }
         }
     }
 }
