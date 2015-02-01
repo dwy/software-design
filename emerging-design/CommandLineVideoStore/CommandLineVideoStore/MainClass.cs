@@ -43,13 +43,16 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
+                string[] rentalStrings2 = input.Split(' ');
+                var number2 = int.Parse(rentalStrings2[0]);
+                var rentedMovie2 = _moviesRepository.GetBy(number2);
+                int daysRented = int.Parse(rentalStrings2[1]);
+                var rental = new Rental(rentedMovie2, daysRented);
+                rentals.Add(rental);
+
                 string[] rentalStrings = input.Split(' ');
                 var number = int.Parse(rentalStrings[0]);
                 var rentedMovie = _moviesRepository.GetBy(number);
-                int daysRented = int.Parse(rentalStrings[1]);
-                var rental = new Rental(rentedMovie, daysRented);
-                rentals.Add(rental);
-
                 decimal thisAmount = 0;
 
                 //determine amounts for rental
