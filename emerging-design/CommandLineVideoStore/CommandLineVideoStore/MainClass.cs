@@ -33,10 +33,8 @@ namespace CommandLineVideoStore
             List<Rental> rentals = ReadRentals();
             var customer = new Customer(customerName, rentals);
             string result = PrintRentalRecord(customer);
-            int frequentRenterPoints = CalculateFrequentRenterPoints(customer);
-            decimal totalAmount = CalculateTotalAmount(customer);
 
-            result += PrintFooter(totalAmount, frequentRenterPoints);
+            result += PrintFooter(customer, CalculateTotalAmount(customer), CalculateFrequentRenterPoints(customer));
 
             _out.Write(result);
         }
@@ -70,7 +68,7 @@ namespace CommandLineVideoStore
             return result;
         }
 
-        private static string PrintFooter(decimal totalAmount, int frequentRenterPoints)
+        private static string PrintFooter(Customer customer, decimal totalAmount, int frequentRenterPoints)
         {
             string footer = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             footer += "You earned " + frequentRenterPoints + " frequent renter points\n";
