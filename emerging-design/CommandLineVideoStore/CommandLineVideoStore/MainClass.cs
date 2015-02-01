@@ -26,8 +26,7 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            List<Movie> movies = _moviesRepository.LoadAll();
-            PrintMovies(movies);
+            PrintMovies();
 
             _out.Write("Enter customer name: ");
             string customerName = _in.ReadLine();
@@ -46,8 +45,8 @@ namespace CommandLineVideoStore
                     break;
                 }
                 string[] rentalStrings = input.Split(' ');
-                var index = int.Parse(rentalStrings[0]);
-                var rentedMovie = movies[index];
+                var number = int.Parse(rentalStrings[0]);
+                var rentedMovie = _moviesRepository.GetBy(number);
                 int daysRented = int.Parse(rentalStrings[1]);
                 var rental = new Rental(rentedMovie, daysRented);
                 rentals.Add(rental);
@@ -92,8 +91,9 @@ namespace CommandLineVideoStore
             _out.Write(result);
         }
 
-        private void PrintMovies(List<Movie> movies)
+        private void PrintMovies()
         {
+            var movies = _moviesRepository.GetAll();
             foreach (var movie in movies)
             {
                 _out.WriteLine(movie.Number + ": " + movie.Name);

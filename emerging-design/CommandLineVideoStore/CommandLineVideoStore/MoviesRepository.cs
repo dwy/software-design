@@ -14,7 +14,17 @@ namespace CommandLineVideoStore
             _movies = LoadAll();
         }
 
-        public List<Movie> LoadAll()
+        public List<Movie> GetAll()
+        {
+            return _movies;
+        }
+
+        public Movie GetBy(int number)
+        {
+            return _movies[number];
+        }
+
+        private List<Movie> LoadAll()
         {
             var movies = new List<Movie>();
             using (FileStream fs = File.Open(_fileName, FileMode.Open, FileAccess.Read))
@@ -32,11 +42,6 @@ namespace CommandLineVideoStore
                 }
             }
             return movies;
-        }
-
-        public Movie GetBy(int number)
-        {
-            return _movies[number];
         }
     }
 }
