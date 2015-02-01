@@ -32,7 +32,7 @@ namespace CommandLineVideoStore
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
             var customer = new Customer(customerName, rentals);
-            string result = PrintRentalRecord(customerName, rentals);
+            string result = PrintRentalRecord(customer);
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
@@ -58,10 +58,10 @@ namespace CommandLineVideoStore
             return rentals;
         }
 
-        private static string PrintRentalRecord(string customerName, List<Rental> rentals)
+        private static string PrintRentalRecord(Customer customer)
         {
-            string result = "Rental Record for " + customerName + "\n";
-            foreach (var rental in rentals)
+            string result = "Rental Record for " + customer.Name + "\n";
+            foreach (var rental in customer.Rentals)
             {
                 // show figures for this rental
                 result += "\t" + rental.Movie.Name + "\t" +
