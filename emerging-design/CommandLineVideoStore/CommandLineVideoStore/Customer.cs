@@ -28,5 +28,19 @@ namespace CommandLineVideoStore
         {
             return Rentals.Sum(rental => rental.CalculateAmount());
         }
+
+        public int FrequentRenterPoints()
+        {
+            int frequentRenterPoints = 0;
+            foreach (var rental in Rentals)
+            {
+                frequentRenterPoints++;
+                if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                {
+                    frequentRenterPoints++;
+                }
+            }
+            return frequentRenterPoints;
+        }
     }
 }

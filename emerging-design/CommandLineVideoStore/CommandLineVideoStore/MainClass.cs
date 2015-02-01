@@ -68,23 +68,7 @@ namespace CommandLineVideoStore
         private void PrintFooter(Customer customer)
         {
             _out.WriteLine("You owed " + customer.TotalAmount().ToString("0.0", CultureInfo.InvariantCulture));
-            _out.WriteLine("You earned " + CalculateFrequentRenterPoints(customer) + " frequent renter points");
-        }
-
-        private static int CalculateFrequentRenterPoints(Customer customer)
-        {
-            int frequentRenterPoints = 0;
-            foreach (var rental in customer.Rentals)
-            {
-                // add frequent renter points
-                frequentRenterPoints++;
-                // add bonus for a two day new release rental
-                if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
-                {
-                    frequentRenterPoints++;
-                }
-            }
-            return frequentRenterPoints;
+            _out.WriteLine("You earned " + customer.FrequentRenterPoints() + " frequent renter points");
         }
 
         private string ReadCustomerName()
