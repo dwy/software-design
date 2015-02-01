@@ -6,10 +6,12 @@ namespace CommandLineVideoStore
     public class MoviesRepository
     {
         private readonly string _fileName;
+        private readonly List<Movie> _movies;
 
         public MoviesRepository(string fileName)
         {
             _fileName = fileName;
+            _movies = LoadAll();
         }
 
         public List<Movie> LoadAll()
