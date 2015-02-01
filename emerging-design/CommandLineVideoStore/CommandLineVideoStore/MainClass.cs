@@ -30,7 +30,7 @@ namespace CommandLineVideoStore
         {
             PrintMovies();
 
-            var customerName = ReadCustomerName();
+            string customerName = ReadCustomerName();
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
@@ -55,6 +55,12 @@ namespace CommandLineVideoStore
             }
 
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
+
+            decimal totalAmount2 = 0;
+            foreach (var rental in rentals)
+            {
+                totalAmount2 += rental.CalculateAmount();
+            }
 
             // add footer lines
             result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
