@@ -57,10 +57,21 @@ namespace CommandLineVideoStore
                 {
                     frequentRenterPoints++;
                 }
-
                 // show figures for this rental
                 result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
+            }
+
+            int frequentRenterPoints2 = 0;
+            foreach (var rental in rentals)
+            {
+                // add frequent renter points
+                frequentRenterPoints2++;
+                // add bonus for a two day new release rental
+                if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                {
+                    frequentRenterPoints2++;
+                }
             }
 
             // add footer lines
