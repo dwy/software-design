@@ -54,6 +54,17 @@ namespace CommandLineVideoStore
                 totalAmount += thisAmount;
             }
 
+            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
+
+            // add footer lines
+            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
+
+            _out.Write(result);
+        }
+
+        private static int CalculateFrequentRenterPoints(List<Rental> rentals)
+        {
             int frequentRenterPoints = 0;
             foreach (var rental in rentals)
             {
@@ -65,12 +76,7 @@ namespace CommandLineVideoStore
                     frequentRenterPoints++;
                 }
             }
-
-            // add footer lines
-            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
-
-            _out.Write(result);
+            return frequentRenterPoints;
         }
 
         private string ReadCustomerName()
