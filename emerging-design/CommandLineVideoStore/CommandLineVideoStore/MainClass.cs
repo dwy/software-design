@@ -62,11 +62,16 @@ namespace CommandLineVideoStore
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
-            // add footer lines
-            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
+            result += PrintFooter(totalAmount, frequentRenterPoints);
 
             _out.Write(result);
+        }
+
+        private static string PrintFooter(decimal totalAmount, int frequentRenterPoints)
+        {
+            string footer = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+            footer += "You earned " + frequentRenterPoints + " frequent renter points\n";
+            return footer;
         }
 
         private static decimal CalculateTotalAmount(List<Rental> rentals)
