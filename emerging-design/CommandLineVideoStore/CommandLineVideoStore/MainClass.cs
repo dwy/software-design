@@ -43,11 +43,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                string[] rentalStrings2 = input.Split(' ');
-                var number2 = int.Parse(rentalStrings2[0]);
-                var rentedMovie2 = _moviesRepository.GetBy(number2);
-                int daysRented = int.Parse(rentalStrings2[1]);
-                var rental = new Rental(rentedMovie2, daysRented);
+                var rental = CreateRentalFrom(input);
                 rentals.Add(rental);
 
                 string[] rentalStrings = input.Split(' ');
@@ -91,6 +87,15 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private Rental CreateRentalFrom(string input)
+        {
+            string[] rentalStrings = input.Split(' ');
+            var number = int.Parse(rentalStrings[0]);
+            var rentedMovie = _moviesRepository.GetBy(number);
+            int daysRented = int.Parse(rentalStrings[1]);
+            return new Rental(rentedMovie, daysRented);
         }
 
         private string ReadCustomerName()
