@@ -29,13 +29,13 @@ namespace CommandLineVideoStore
         public void Run()
         {
             PrintMovies();
+
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
             var customer = new Customer(customerName, rentals);
-            PrintRentalRecord(customer);
-            string result2 = PrintFooter(customer);
 
-            _out.Write(result2);
+            PrintRentalRecord(customer);
+            PrintFooter(customer);
         }
 
         private List<Rental> ReadRentals()
@@ -57,19 +57,18 @@ namespace CommandLineVideoStore
 
         private void PrintRentalRecord(Customer customer)
         {
-            _out.Write("Rental Record for " + customer.Name + "\n");
+            _out.WriteLine("Rental Record for " + customer.Name);
             foreach (var rental in customer.Rentals)
             {
                 // show figures for this rental
-                _out.Write("\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture) + "\n");
+                _out.WriteLine("\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture));
             }
         }
 
-        private static string PrintFooter(Customer customer)
+        private void PrintFooter(Customer customer)
         {
-            string footer = "You owed " + CalculateTotalAmount(customer).ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            footer += "You earned " + CalculateFrequentRenterPoints(customer) + " frequent renter points\n";
-            return footer;
+            _out.WriteLine("You owed " + CalculateTotalAmount(customer).ToString("0.0", CultureInfo.InvariantCulture));
+            _out.WriteLine("You earned " + CalculateFrequentRenterPoints(customer) + " frequent renter points");
         }
 
         private static decimal CalculateTotalAmount(Customer customer)
