@@ -28,8 +28,7 @@ namespace CommandLineVideoStore
         {
             PrintMovies();
 
-            _out.Write("Enter customer name: ");
-            string customerName = _in.ReadLine();
+            var customerName = ReadCustomerName();
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
@@ -89,6 +88,12 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private string ReadCustomerName()
+        {
+            _out.Write("Enter customer name: ");
+            return _in.ReadLine();
         }
 
         private void PrintMovies()
