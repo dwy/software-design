@@ -9,6 +9,7 @@ namespace CommandLineVideoStore
     {
         private readonly TextReader _in;
         private readonly TextWriter _out;
+        private readonly MoviesRepository _moviesRepository;
 
         public static void Main()
         {
@@ -20,11 +21,12 @@ namespace CommandLineVideoStore
         {
             _out = @out;
             _in = @in;
+            _moviesRepository = new MoviesRepository(@"movies.cvs");
         }
 
         public void Run()
         {
-            List<Movie> movies = new MoviesRepository(@"movies.cvs").LoadAll();
+            List<Movie> movies = _moviesRepository.LoadAll();
             PrintMovies(movies);
 
             _out.Write("Enter customer name: ");
