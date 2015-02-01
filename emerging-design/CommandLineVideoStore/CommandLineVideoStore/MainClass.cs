@@ -32,11 +32,10 @@ namespace CommandLineVideoStore
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
             var customer = new Customer(customerName, rentals);
-            string result = PrintRentalRecord(customer);
+            string result1 = PrintRentalRecord(customer);
+            string result2 = PrintFooter(customer);
 
-            result += PrintFooter(customer);
-
-            _out.Write(result);
+            _out.Write(result1 + result2);
         }
 
         private List<Rental> ReadRentals()
@@ -58,14 +57,13 @@ namespace CommandLineVideoStore
 
         private static string PrintRentalRecord(Customer customer)
         {
-            string result = "Rental Record for " + customer.Name + "\n";
+            string record = "Rental Record for " + customer.Name + "\n";
             foreach (var rental in customer.Rentals)
             {
                 // show figures for this rental
-                result += "\t" + rental.Movie.Name + "\t" +
-                          rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                record += "\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
-            return result;
+            return record;
         }
 
         private static string PrintFooter(Customer customer)
