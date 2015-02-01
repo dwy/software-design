@@ -21,23 +21,23 @@
             get { return _daysRented; }
         }
 
-        public static decimal CalculateRentalAmount(Rental rental)
+        public decimal CalculateAmount()
         {
             decimal thisAmount = 0;
-            switch (rental.Movie.Category)
+            switch (Movie.Category)
             {
                 case "REGULAR":
                     thisAmount += 2;
-                    if (rental.DaysRented > 2)
-                        thisAmount += (rental.DaysRented - 2)*1.5m;
+                    if (DaysRented > 2)
+                        thisAmount += (DaysRented - 2)*1.5m;
                     break;
                 case "NEW_RELEASE":
-                    thisAmount += rental.DaysRented*3;
+                    thisAmount += DaysRented*3;
                     break;
                 case "CHILDRENS":
                     thisAmount += 1.5m;
-                    if (rental.DaysRented > 3)
-                        thisAmount += (rental.DaysRented - 3)*1.5m;
+                    if (DaysRented > 3)
+                        thisAmount += (DaysRented - 3)*1.5m;
                     break;
             }
             return thisAmount;

@@ -48,7 +48,7 @@ namespace CommandLineVideoStore
                 var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
 
-                decimal thisAmount = Rental.CalculateRentalAmount(rental);
+                decimal thisAmount = rental.CalculateAmount();
 
                 // add frequent renter points
                 frequentRenterPoints++;
