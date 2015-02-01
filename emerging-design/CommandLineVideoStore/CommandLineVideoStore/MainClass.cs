@@ -10,6 +10,12 @@ namespace CommandLineVideoStore
         private readonly TextReader _in;
         private readonly TextWriter _out;
         private readonly MoviesRepository _moviesRepository;
+        private readonly RentalFactory _rentalFactory;
+
+        public RentalFactory RentalFactory
+        {
+            get { return _rentalFactory; }
+        }
 
         public static void Main()
         {
@@ -22,6 +28,7 @@ namespace CommandLineVideoStore
             _out = @out;
             _in = @in;
             _moviesRepository = new MoviesRepository(@"movies.cvs");
+            _rentalFactory = new RentalFactory();
         }
 
         public void Run()
@@ -43,7 +50,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = CreateRentalFrom(input);
+                var rental = RentalFactory.CreateRentalFrom(input, _moviesRepository);
                 rentals.Add(rental);
 
                 string[] rentalStrings = input.Split(' ');
@@ -87,15 +94,6 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
-        }
-
-        private Rental CreateRentalFrom(string input)
-        {
-            string[] rentalStrings = input.Split(' ');
-            var number = int.Parse(rentalStrings[0]);
-            var rentedMovie = _moviesRepository.GetBy(number);
-            int daysRented = int.Parse(rentalStrings[1]);
-            return new Rental(rentedMovie, daysRented);
         }
 
         private string ReadCustomerName()
