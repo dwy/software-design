@@ -59,12 +59,13 @@ namespace CommandLineVideoStore
                 }
                 string[] rental = input.Split(' ');
                 var index = int.Parse(rental[0]);
-                var movie = movies[index];
+                var rentedMovie = movies[index];
+                int daysRented = int.Parse(rental[1]);
+                var rental2 = new Rental(rentedMovie, daysRented);
                 decimal thisAmount = 0;
 
-                int daysRented = int.Parse(rental[1]);
                 //determine amounts for rental
-                switch (movie.Category)
+                switch (rentedMovie.Category)
                 {
                     case "REGULAR":
                         thisAmount += 2;
@@ -84,12 +85,12 @@ namespace CommandLineVideoStore
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (movie.Category.Equals("NEW_RELEASE") && daysRented > 1)
+                if (rentedMovie.Category.Equals("NEW_RELEASE") && daysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
                 // show figures for this rental
-                result += "\t" + movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                result += "\t" + rentedMovie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
