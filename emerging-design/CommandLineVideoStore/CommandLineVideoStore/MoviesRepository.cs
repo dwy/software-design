@@ -5,10 +5,17 @@ namespace CommandLineVideoStore
 {
     public class MoviesRepository
     {
-        public static List<Movie> LoadAll()
+        private readonly string _fileName;
+
+        public MoviesRepository()
+        {
+            _fileName = @"movies.cvs";
+        }
+
+        public List<Movie> LoadAll()
         {
             var movies = new List<Movie>();
-            using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = File.Open(_fileName, FileMode.Open, FileAccess.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             using (StreamReader reader = new StreamReader(bs))
             {
