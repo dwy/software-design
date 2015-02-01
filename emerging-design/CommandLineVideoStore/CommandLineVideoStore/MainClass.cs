@@ -24,7 +24,7 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            List<Movie> movies = new MoviesRepository().LoadAll();
+            List<Movie> movies = new MoviesRepository(@"movies.cvs").LoadAll();
             PrintMovies(movies);
 
             _out.Write("Enter customer name: ");

@@ -7,9 +7,9 @@ namespace CommandLineVideoStore
     {
         private readonly string _fileName;
 
-        public MoviesRepository()
+        public MoviesRepository(string fileName)
         {
-            _fileName = @"movies.cvs";
+            _fileName = fileName;
         }
 
         public List<Movie> LoadAll()
