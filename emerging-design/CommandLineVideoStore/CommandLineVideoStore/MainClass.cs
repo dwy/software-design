@@ -48,13 +48,10 @@ namespace CommandLineVideoStore
                 var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
 
-                string[] rentalStrings = input.Split(' ');
-                var number = int.Parse(rentalStrings[0]);
-                var rentedMovie = _moviesRepository.GetBy(number);
                 decimal thisAmount = 0;
 
                 //determine amounts for rental
-                switch (rentedMovie.Category)
+                switch (rental.Movie.Category)
                 {
                     case "REGULAR":
                         thisAmount += 2;
@@ -74,13 +71,13 @@ namespace CommandLineVideoStore
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (rentedMovie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                if (rental.Movie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
 
                 // show figures for this rental
-                result += "\t" + rentedMovie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                result += "\t" + rental.Movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
