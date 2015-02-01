@@ -48,25 +48,7 @@ namespace CommandLineVideoStore
                 var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
 
-                decimal thisAmount = 0;
-
-                //determine amounts for rental
-                switch (rental.Movie.Category)
-                {
-                    case "REGULAR":
-                        thisAmount += 2;
-                        if (rental.DaysRented> 2)
-                            thisAmount += (rental.DaysRented - 2) * 1.5m;
-                        break;
-                    case "NEW_RELEASE":
-                        thisAmount += rental.DaysRented * 3;
-                        break;
-                    case "CHILDRENS":
-                        thisAmount += 1.5m;
-                        if (rental.DaysRented > 3)
-                            thisAmount += (rental.DaysRented - 3) * 1.5m;
-                        break;
-                }
+                decimal thisAmount = CalculateRentalAmount(rental);
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -86,6 +68,30 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static decimal CalculateRentalAmount(Rental rental)
+        {
+            decimal thisAmount = 0;
+
+            //determine amounts for rental
+            switch (rental.Movie.Category)
+            {
+                case "REGULAR":
+                    thisAmount += 2;
+                    if (rental.DaysRented > 2)
+                        thisAmount += (rental.DaysRented - 2)*1.5m;
+                    break;
+                case "NEW_RELEASE":
+                    thisAmount += rental.DaysRented*3;
+                    break;
+                case "CHILDRENS":
+                    thisAmount += 1.5m;
+                    if (rental.DaysRented > 3)
+                        thisAmount += (rental.DaysRented - 3)*1.5m;
+                    break;
+            }
+            return thisAmount;
         }
 
         private string ReadCustomerName()
