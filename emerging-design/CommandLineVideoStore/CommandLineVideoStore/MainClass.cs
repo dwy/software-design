@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace CommandLineVideoStore
 {
@@ -73,12 +74,7 @@ namespace CommandLineVideoStore
 
         private static decimal CalculateTotalAmount(Customer customer)
         {
-            decimal totalAmount = 0;
-            foreach (var rental in customer.Rentals)
-            {
-                totalAmount += rental.CalculateAmount();
-            }
-            return totalAmount;
+            return customer.Rentals.Sum(rental => rental.CalculateAmount());
         }
 
         private static int CalculateFrequentRenterPoints(Customer customer)
