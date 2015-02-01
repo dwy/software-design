@@ -33,7 +33,7 @@ namespace CommandLineVideoStore
             List<Rental> rentals = ReadRentals();
             var customer = new Customer(customerName, rentals);
             string result = PrintRentalRecord(customer);
-            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
+            int frequentRenterPoints = CalculateFrequentRenterPoints(customer);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
             result += PrintFooter(totalAmount, frequentRenterPoints);
@@ -87,10 +87,10 @@ namespace CommandLineVideoStore
             return totalAmount;
         }
 
-        private static int CalculateFrequentRenterPoints(List<Rental> rentals)
+        private static int CalculateFrequentRenterPoints(Customer customer)
         {
             int frequentRenterPoints = 0;
-            foreach (var rental in rentals)
+            foreach (var rental in customer.Rentals)
             {
                 // add frequent renter points
                 frequentRenterPoints++;
