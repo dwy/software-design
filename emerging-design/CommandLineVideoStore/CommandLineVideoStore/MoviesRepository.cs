@@ -33,5 +33,10 @@ namespace CommandLineVideoStore
             }
             return movies;
         }
+
+        public Movie GetBy(int number)
+        {
+            return _movies[number];
+        }
     }
 }
