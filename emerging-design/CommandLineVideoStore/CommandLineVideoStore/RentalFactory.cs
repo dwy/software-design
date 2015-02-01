@@ -9,12 +9,12 @@ namespace CommandLineVideoStore
             _moviesRepository = moviesRepository;
         }
 
-        public Rental CreateRentalFrom(string input)
+        public Rental CreateFrom(string input)
         {
             string[] rentalStrings = input.Split(' ');
-            var number = int.Parse(rentalStrings[0]);
-            var rentedMovie = _moviesRepository.GetBy(number);
+            var movieNumber = int.Parse(rentalStrings[0]);
             int daysRented = int.Parse(rentalStrings[1]);
+            var rentedMovie = _moviesRepository.GetBy(movieNumber);
             return new Rental(rentedMovie, daysRented);
         }
     }

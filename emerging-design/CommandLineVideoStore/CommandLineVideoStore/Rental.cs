@@ -23,24 +23,24 @@
 
         public decimal CalculateAmount()
         {
-            decimal thisAmount = 0;
+            decimal amount = 0;
             switch (Movie.Category)
             {
                 case "REGULAR":
-                    thisAmount += 2;
+                    amount += 2;
                     if (DaysRented > 2)
-                        thisAmount += (DaysRented - 2)*1.5m;
+                        amount += (DaysRented - 2) * 1.5m;
                     break;
                 case "NEW_RELEASE":
-                    thisAmount += DaysRented*3;
+                    amount += DaysRented * 3;
                     break;
                 case "CHILDRENS":
-                    thisAmount += 1.5m;
+                    amount += 1.5m;
                     if (DaysRented > 3)
-                        thisAmount += (DaysRented - 3)*1.5m;
+                        amount += (DaysRented - 3) * 1.5m;
                     break;
             }
-            return thisAmount;
+            return amount;
         }
     }
 }

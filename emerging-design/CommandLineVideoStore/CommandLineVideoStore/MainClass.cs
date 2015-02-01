@@ -38,6 +38,21 @@ namespace CommandLineVideoStore
             PrintFooter(customer);
         }
 
+        private void PrintMovies()
+        {
+            var movies = _moviesRepository.GetAll();
+            foreach (var movie in movies)
+            {
+                _out.WriteLine(movie.Number + ": " + movie.Name);
+            }
+        }
+
+        private string ReadCustomerName()
+        {
+            _out.Write("Enter customer name: ");
+            return _in.ReadLine();
+        }
+
         private List<Rental> ReadRentals()
         {
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
@@ -49,7 +64,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = _rentalFactory.CreateRentalFrom(input);
+                var rental = _rentalFactory.CreateFrom(input);
                 rentals.Add(rental);
             }
             return rentals;
@@ -58,32 +73,18 @@ namespace CommandLineVideoStore
         private void PrintRentalRecord(Customer customer)
         {
             _out.WriteLine("Rental Record for " + customer.Name);
-            foreach (var rental in customer.Rentals)
-            {
-                // show figures for this rental
-                _out.WriteLine("\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture));
-            }
+            customer.Rentals.ForEach(PrintRental);
+        }
+
+        private void PrintRental(Rental rental)
+        {
+            _out.WriteLine("\t" + rental.Movie.Name + "\t" + rental.CalculateAmount().ToString("0.0", CultureInfo.InvariantCulture));
         }
 
         private void PrintFooter(Customer customer)
         {
             _out.WriteLine("You owed " + customer.TotalAmount().ToString("0.0", CultureInfo.InvariantCulture));
             _out.WriteLine("You earned " + customer.FrequentRenterPoints() + " frequent renter points");
-        }
-
-        private string ReadCustomerName()
-        {
-            _out.Write("Enter customer name: ");
-            return _in.ReadLine();
-        }
-
-        private void PrintMovies()
-        {
-            var movies = _moviesRepository.GetAll();
-            foreach (var movie in movies)
-            {
-                _out.WriteLine(movie.Number + ": " + movie.Name);
-            }
         }
     }
 }
