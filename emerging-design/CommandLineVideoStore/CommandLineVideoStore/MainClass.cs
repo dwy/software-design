@@ -37,9 +37,12 @@ namespace CommandLineVideoStore
                     string[] movieStrings = line.Split(';');
                     var movie = new Movie(movieStrings[0], movieStrings[1], movieNumber);
                     movies.Add(movie);
-                    _out.WriteLine(movie.Number + ": " + movie.Name);
                     movieNumber++;
                 }
+            }
+            foreach (var movie in movies)
+            {
+                _out.WriteLine(movie.Number + ": " + movie.Name);
             }
 
             _out.Write("Enter customer name: ");
