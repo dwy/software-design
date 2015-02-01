@@ -25,7 +25,7 @@ namespace CommandLineVideoStore
         public void Run()
         {
             // read movies from file
-            var movies2 = new List<Movie>();
+            var movies = new List<Movie>();
             using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             using (StreamReader reader = new StreamReader(bs))
@@ -34,10 +34,10 @@ namespace CommandLineVideoStore
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    string[] movie = line.Split(';');
-                    var movie2 = new Movie(movie[0], movie[1], movieNumber);
-                    movies2.Add(movie2);
-                    _out.WriteLine(movie2.Number + ": " + movie2.Name);
+                    string[] movieStrings = line.Split(';');
+                    var movie = new Movie(movieStrings[0], movieStrings[1], movieNumber);
+                    movies.Add(movie);
+                    _out.WriteLine(movie.Number + ": " + movie.Name);
                     movieNumber++;
                 }
             }
@@ -59,12 +59,12 @@ namespace CommandLineVideoStore
                 }
                 string[] rental = input.Split(' ');
                 var index = int.Parse(rental[0]);
-                var movie2 = movies2[index];
+                var movie = movies[index];
                 decimal thisAmount = 0;
 
                 int daysRented = int.Parse(rental[1]);
                 //determine amounts for rental
-                switch (movie2.Category)
+                switch (movie.Category)
                 {
                     case "REGULAR":
                         thisAmount += 2;
@@ -84,12 +84,12 @@ namespace CommandLineVideoStore
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (movie2.Category.Equals("NEW_RELEASE") && daysRented > 1)
+                if (movie.Category.Equals("NEW_RELEASE") && daysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
                 // show figures for this rental
-                result += "\t" + movie2.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                result += "\t" + movie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
