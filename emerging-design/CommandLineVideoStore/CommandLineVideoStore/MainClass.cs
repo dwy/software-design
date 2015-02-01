@@ -34,7 +34,7 @@ namespace CommandLineVideoStore
             var customer = new Customer(customerName, rentals);
             string result = PrintRentalRecord(customer);
             int frequentRenterPoints = CalculateFrequentRenterPoints(customer);
-            decimal totalAmount = CalculateTotalAmount(rentals);
+            decimal totalAmount = CalculateTotalAmount(customer);
 
             result += PrintFooter(totalAmount, frequentRenterPoints);
 
@@ -77,10 +77,10 @@ namespace CommandLineVideoStore
             return footer;
         }
 
-        private static decimal CalculateTotalAmount(List<Rental> rentals)
+        private static decimal CalculateTotalAmount(Customer customer)
         {
             decimal totalAmount = 0;
-            foreach (var rental in rentals)
+            foreach (var rental in customer.Rentals)
             {
                 totalAmount += rental.CalculateAmount();
             }
