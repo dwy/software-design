@@ -29,11 +29,20 @@ namespace CommandLineVideoStore
         public void Run()
         {
             PrintMovies();
-
             string customerName = ReadCustomerName();
+            List<Rental> rentals = ReadRentals();
+            string result = PrintRentalRecord(customerName, rentals);
+            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
+            decimal totalAmount = CalculateTotalAmount(rentals);
 
+            result += PrintFooter(totalAmount, frequentRenterPoints);
+
+            _out.Write(result);
+        }
+
+        private List<Rental> ReadRentals()
+        {
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
-
             var rentals = new List<Rental>();
             while (true)
             {
@@ -45,14 +54,7 @@ namespace CommandLineVideoStore
                 var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
             }
-
-            string result = PrintRentalRecord(customerName, rentals);
-            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
-            decimal totalAmount = CalculateTotalAmount(rentals);
-
-            result += PrintFooter(totalAmount, frequentRenterPoints);
-
-            _out.Write(result);
+            return rentals;
         }
 
         private static string PrintRentalRecord(string customerName, List<Rental> rentals)
