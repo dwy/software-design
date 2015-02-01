@@ -23,7 +23,7 @@ namespace CommandLineVideoStore
             _out = @out;
             _in = @in;
             _moviesRepository = new MoviesRepository(@"movies.cvs");
-            _rentalFactory = new RentalFactory();
+            _rentalFactory = new RentalFactory(_moviesRepository);
         }
 
         public void Run()
@@ -45,7 +45,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = _rentalFactory.CreateRentalFrom(input, _moviesRepository);
+                var rental = _rentalFactory.CreateRentalFrom(input);
                 rentals.Add(rental);
 
                 string[] rentalStrings = input.Split(' ');
