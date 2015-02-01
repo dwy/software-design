@@ -50,6 +50,7 @@ namespace CommandLineVideoStore
             decimal totalAmount = 0;
             int frequentRenterPoints = 0;
             string result = "Rental Record for " + customerName + "\n";
+            var rentals = new List<Rental>();
             while (true)
             {
                 string input = _in.ReadLine();
@@ -57,11 +58,13 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                string[] rental = input.Split(' ');
-                var index = int.Parse(rental[0]);
+                string[] rentalStrings = input.Split(' ');
+                var index = int.Parse(rentalStrings[0]);
                 var rentedMovie = movies[index];
-                int daysRented = int.Parse(rental[1]);
-                var rental2 = new Rental(rentedMovie, daysRented);
+                int daysRented = int.Parse(rentalStrings[1]);
+                var rental = new Rental(rentedMovie, daysRented);
+                rentals.Add(rental);
+
                 decimal thisAmount = 0;
 
                 //determine amounts for rental
@@ -69,26 +72,27 @@ namespace CommandLineVideoStore
                 {
                     case "REGULAR":
                         thisAmount += 2;
-                        if (daysRented > 2)
-                            thisAmount += (daysRented - 2)*1.5m;
+                        if (rental.DaysRented> 2)
+                            thisAmount += (rental.DaysRented - 2) * 1.5m;
                         break;
                     case "NEW_RELEASE":
-                        thisAmount += daysRented*3;
+                        thisAmount += rental.DaysRented * 3;
                         break;
                     case "CHILDRENS":
                         thisAmount += 1.5m;
-                        if (daysRented > 3)
-                            thisAmount += (daysRented - 3)*1.5m;
+                        if (rental.DaysRented > 3)
+                            thisAmount += (rental.DaysRented - 3) * 1.5m;
                         break;
                 }
 
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (rentedMovie.Category.Equals("NEW_RELEASE") && daysRented > 1)
+                if (rentedMovie.Category.Equals("NEW_RELEASE") && rental.DaysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
+
                 // show figures for this rental
                 result += "\t" + rentedMovie.Name + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
