@@ -12,11 +12,6 @@ namespace CommandLineVideoStore
         private readonly MoviesRepository _moviesRepository;
         private readonly RentalFactory _rentalFactory;
 
-        public RentalFactory RentalFactory
-        {
-            get { return _rentalFactory; }
-        }
-
         public static void Main()
         {
             new MainClass(Console.In, Console.Out).Run();
@@ -50,7 +45,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = RentalFactory.CreateRentalFrom(input, _moviesRepository);
+                var rental = _rentalFactory.CreateRentalFrom(input, _moviesRepository);
                 rentals.Add(rental);
 
                 string[] rentalStrings = input.Split(' ');
