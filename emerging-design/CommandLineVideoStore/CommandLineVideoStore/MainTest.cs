@@ -4,6 +4,9 @@ using NUnit.Framework;
 
 namespace CommandLineVideoStore
 {
+    /**
+     * Simple pin-down test. Do not use this as an example for a good test ;-)
+     */
     [TestFixture]
     public class MainTest
     {

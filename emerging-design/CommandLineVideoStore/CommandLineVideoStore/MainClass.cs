@@ -24,21 +24,10 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            // read movies from file
-            var movies = new List<string[]>();
-            using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
-            using (BufferedStream bs = new BufferedStream(fs))
-            using (StreamReader reader = new StreamReader(bs))
+            List<Movie> movies = MovieRepository.GetMovies();
+            foreach (var movie in movies)
             {
-                int movieNumber = 0;
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] movie = line.Split(';');
-                    movies.Add(movie);
-                    _out.WriteLine(movieNumber + ": " + movie[0]);
-                    movieNumber++;
-                }
+                _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
             }
 
             _out.Write("Enter customer name: ");
@@ -56,38 +45,37 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                string[] rental = input.Split(' ');
-                string[] movie = movies[int.Parse(rental[0])];
+                var rental = Rental.ParseFrom(input);
+                Movie movie = movies[rental.MovieNumber];
                 decimal thisAmount = 0;
 
-                int daysRented = int.Parse(rental[1]);
                 //determine amounts for rental
-                switch (movie[1])
+                switch (movie.Type)
                 {
                     case "REGULAR":
                         thisAmount += 2;
-                        if (daysRented > 2)
-                            thisAmount += (daysRented - 2)*1.5m;
+                        if (rental.DaysRented > 2)
+                            thisAmount += (rental.DaysRented - 2) * 1.5m;
                         break;
                     case "NEW_RELEASE":
-                        thisAmount += daysRented*3;
+                        thisAmount += rental.DaysRented * 3;
                         break;
                     case "CHILDRENS":
                         thisAmount += 1.5m;
-                        if (daysRented > 3)
-                            thisAmount += (daysRented - 3)*1.5m;
+                        if (rental.DaysRented > 3)
+                            thisAmount += (rental.DaysRented - 3) * 1.5m;
                         break;
                 }
 
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (movie[1].Equals("NEW_RELEASE") && daysRented > 1)
+                if (movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
                 // show figures for this rental
-                result += "\t" + movie[0] + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                result += "\t" + movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
