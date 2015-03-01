@@ -30,7 +30,7 @@ namespace CommandLineVideoStore
         public void Run()
         {
             PrintMovies(_out, _movieRepository);
-            string customerName = ReadCustomerName(_out);
+            string customerName = ReadCustomerName(_in, _out);
             List<Rental> rentals = ReadRentals(_in, _out, _rentalFactory);
             var customer = new Customer(customerName, rentals);
             PrintRentals(customer, _out);
@@ -74,10 +74,10 @@ namespace CommandLineVideoStore
             return rentals;
         }
 
-        public string ReadCustomerName(TextWriter textWriter)
+        public string ReadCustomerName(TextReader textReader, TextWriter textWriter)
         {
             textWriter.Write("Enter customer name: ");
-            string customerName = _in.ReadLine();
+            string customerName = textReader.ReadLine();
             return customerName;
         }
 
