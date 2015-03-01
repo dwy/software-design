@@ -31,7 +31,7 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            _userInteraction.PrintMovies(_movieRepository);
+            _userInteraction.PrintMovies(_movieRepository.GetMovies());
             string customerName = _userInteraction.ReadCustomerName();
             List<Rental> rentals = _userInteraction.ReadRentals();
             var customer = new Customer(customerName, rentals);

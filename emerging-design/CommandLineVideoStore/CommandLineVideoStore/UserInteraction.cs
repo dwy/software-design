@@ -17,9 +17,8 @@ namespace CommandLineVideoStore
             _rentalFactory = rentalFactory;
         }
 
-        public void PrintMovies(MovieRepository movieRepository)
+        public void PrintMovies(List<Movie> movies)
         {
-            List<Movie> movies = movieRepository.GetMovies();
             foreach (var movie in movies)
             {
                 _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
@@ -29,8 +28,7 @@ namespace CommandLineVideoStore
         public string ReadCustomerName()
         {
             _out.Write("Enter customer name: ");
-            string customerName = _in.ReadLine();
-            return customerName;
+            return _in.ReadLine();
         }
 
         public List<Rental> ReadRentals()
