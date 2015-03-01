@@ -23,5 +23,10 @@ namespace CommandLineVideoStore
             }
             return movies;
         }
+
+        public static Movie GetMovieBy(List<Movie> movies, int movieNumber)
+        {
+            return movies[movieNumber];
+        }
     }
 }
