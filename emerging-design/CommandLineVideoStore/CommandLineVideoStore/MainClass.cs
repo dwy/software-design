@@ -51,21 +51,20 @@ namespace CommandLineVideoStore
                     break;
                 }
                 var rental = _rentalFactory.ParseFrom(input);
-                Movie movie = _movieRepository.GetMovieBy(rental.MovieNumber);
-                rental.Movie = movie;
+                rental.Movie = _movieRepository.GetMovieBy(rental.MovieNumber);
                 rentals.Add(rental);
 
-                decimal thisAmount = rental.CalculateAmount(movie);
+                decimal thisAmount = rental.CalculateAmount(rental.Movie);
 
                 // add frequent renter points
                 frequentRenterPoints++;
                 // add bonus for a two day new release rental
-                if (movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
                 {
                     frequentRenterPoints++;
                 }
                 // show figures for this rental
-                result += "\t" + movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
                 totalAmount += thisAmount;
             }
 
