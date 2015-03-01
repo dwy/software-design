@@ -32,7 +32,7 @@ namespace CommandLineVideoStore
             PrintMovies();
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
-            PrintRentals(customerName, rentals);
+            PrintRentals(new Customer(customerName, rentals));
             PrintFooter(rentals);
         }
 
@@ -46,10 +46,10 @@ namespace CommandLineVideoStore
             _out.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
         }
 
-        private void PrintRentals(string customerName, List<Rental> rentals)
+        private void PrintRentals(Customer customer)
         {
-            _out.WriteLine("Rental Record for {0}", customerName);
-            foreach (var rental in rentals)
+            _out.WriteLine("Rental Record for {0}", customer.Name);
+            foreach (var rental in customer.Rentals)
             {
                 decimal thisAmount = rental.CalculateAmount();
                 _out.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
@@ -67,10 +67,9 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental1 = _rentalFactory.CreateRental(input);
-                rentals.Add(rental1);
+                Rental rental = _rentalFactory.CreateRental(input);
+                rentals.Add(rental);
             }
-
             return rentals;
         }
 
