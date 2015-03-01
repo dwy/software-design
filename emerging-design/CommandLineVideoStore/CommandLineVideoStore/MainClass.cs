@@ -50,7 +50,7 @@ namespace CommandLineVideoStore
                 }
                 var rental = RentalFactory.ParseFrom(input);
                 rentals.Add(rental);
-                Movie movie = MovieRepository.GetMovieBy(movies, rental.MovieNumber);
+                Movie movie = MovieRepository.GetMovieBy(_movieRepository, movies, rental.MovieNumber);
                 decimal thisAmount = 0;
 
                 //determine amounts for rental
