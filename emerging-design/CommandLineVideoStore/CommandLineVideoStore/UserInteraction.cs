@@ -6,6 +6,10 @@ namespace CommandLineVideoStore
 {
     public class UserInteraction
     {
+        private TextWriter _textWriter;
+        private TextReader _textReader;
+        private RentalFactory _rentalFactory;
+
         public UserInteraction()
         {
         }
@@ -32,6 +36,7 @@ namespace CommandLineVideoStore
 
         public List<Rental> ReadRentals(TextReader textReader, TextWriter textWriter, RentalFactory rentalFactory)
         {
+            _rentalFactory = rentalFactory;
             textWriter.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
             var rentals = new List<Rental>();
             while (true)
@@ -49,6 +54,7 @@ namespace CommandLineVideoStore
 
         public string ReadCustomerName(TextReader textReader, TextWriter textWriter)
         {
+            _textReader = textReader;
             textWriter.Write("Enter customer name: ");
             string customerName = textReader.ReadLine();
             return customerName;
@@ -56,6 +62,7 @@ namespace CommandLineVideoStore
 
         public void PrintMovies(TextWriter textWriter, MovieRepository movieRepository)
         {
+            _textWriter = textWriter;
             List<Movie> movies = movieRepository.GetMovies();
             foreach (var movie in movies)
             {
