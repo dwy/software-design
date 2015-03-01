@@ -29,37 +29,37 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            PrintMovies();
-            string customerName = ReadCustomerName();
-            List<Rental> rentals = ReadRentals();
+            PrintMovies(_out, _movieRepository);
+            string customerName = ReadCustomerName(_out);
+            List<Rental> rentals = ReadRentals(_out, _rentalFactory);
             var customer = new Customer(customerName, rentals);
-            PrintRentals(customer);
-            PrintFooter(customer);
+            PrintRentals(customer, _out);
+            PrintFooter(customer, _out);
         }
 
-        private void PrintFooter(Customer customer)
+        public void PrintFooter(Customer customer, TextWriter textWriter)
         {   
             int frequentRenterPoints = customer.FrequentRenterPoints;
             decimal totalAmount = customer.TotalAmount;
 
             // add footer lines
-            _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
-            _out.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
+            textWriter.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
+            textWriter.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
         }
 
-        private void PrintRentals(Customer customer)
+        public void PrintRentals(Customer customer, TextWriter textWriter)
         {
-            _out.WriteLine("Rental Record for {0}", customer.Name);
+            textWriter.WriteLine("Rental Record for {0}", customer.Name);
             foreach (var rental in customer.Rentals)
             {
                 decimal thisAmount = rental.CalculateAmount();
-                _out.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
+                textWriter.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
             }
         }
 
-        private List<Rental> ReadRentals()
+        public List<Rental> ReadRentals(TextWriter textWriter, RentalFactory rentalFactory)
         {
-            _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
+            textWriter.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
             var rentals = new List<Rental>();
             while (true)
             {
@@ -68,25 +68,25 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental = _rentalFactory.CreateRental(input);
+                Rental rental = rentalFactory.CreateRental(input);
                 rentals.Add(rental);
             }
             return rentals;
         }
 
-        private string ReadCustomerName()
+        public string ReadCustomerName(TextWriter textWriter)
         {
-            _out.Write("Enter customer name: ");
+            textWriter.Write("Enter customer name: ");
             string customerName = _in.ReadLine();
             return customerName;
         }
 
-        private void PrintMovies()
+        public void PrintMovies(TextWriter textWriter, MovieRepository movieRepository)
         {
-            List<Movie> movies = _movieRepository.GetMovies();
+            List<Movie> movies = movieRepository.GetMovies();
             foreach (var movie in movies)
             {
-                _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
+                textWriter.WriteLine("{0}: {1}", movie.Number, movie.Title);
             }
         }
     }
