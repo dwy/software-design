@@ -10,6 +10,7 @@ namespace CommandLineVideoStore
         private readonly TextReader _in;
         private readonly TextWriter _out;
         private readonly MovieRepository _movieRepository;
+        private readonly RentalFactory _rentalFactory;
 
         public static void Main()
         {
@@ -22,6 +23,7 @@ namespace CommandLineVideoStore
             _out = @out;
             _in = @in;
             _movieRepository = new MovieRepository();
+            _rentalFactory = new RentalFactory(_movieRepository);
         }
 
         public void Run()
@@ -48,7 +50,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = RentalFactory.ParseFrom(new RentalFactory(_movieRepository), input);
+                var rental = _rentalFactory.ParseFrom(input);
                 Movie movie = _movieRepository.GetMovieBy(rental.MovieNumber);
                 rentals.Add(rental);
 
