@@ -39,7 +39,6 @@ namespace CommandLineVideoStore
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
-            decimal totalAmount = 0;
             decimal totalAmount2 = 0;
             int frequentRenterPoints = 0;
             var rentals = new List<Rental>();
@@ -65,7 +64,6 @@ namespace CommandLineVideoStore
                 }
                 // show figures for this rental
                 result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-                totalAmount += thisAmount;
             }
 
             foreach (var rental in rentals)
@@ -74,7 +72,7 @@ namespace CommandLineVideoStore
             }
 
             // add footer lines
-            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+            result += "You owed " + totalAmount2.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
