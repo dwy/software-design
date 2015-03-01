@@ -50,7 +50,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental = CreateRental(_movieRepository, _rentalFactory, input);
+                Rental rental = RentalFactory.CreateRental(_movieRepository, _rentalFactory, input);
                 rentals.Add(rental);
 
                 decimal thisAmount = rental.CalculateAmount(rental.Movie);
@@ -72,13 +72,6 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
-        }
-
-        private static Rental CreateRental(MovieRepository movieRepository, RentalFactory rentalFactory, string input)
-        {
-            var rental = rentalFactory.ParseFrom(input);
-            rental.Movie = movieRepository.GetMovieBy(rental.MovieNumber);
-            return rental;
         }
     }
 }
