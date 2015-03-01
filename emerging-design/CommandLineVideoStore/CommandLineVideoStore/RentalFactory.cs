@@ -11,7 +11,7 @@ namespace CommandLineVideoStore
             _movieRepository = movieRepository;
         }
 
-        public Rental CreateRental(string input)
+        public Rental CreateFrom(string input)
         {
             string[] rentalTokens = input.Split(' ');
             int movieNumber = Int32.Parse(rentalTokens[0]);

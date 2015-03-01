@@ -7,9 +7,9 @@ namespace CommandLineVideoStore
     {
         private readonly List<Movie> _movies;
 
-        public MovieRepository()
+        public MovieRepository(string filePath)
         {
-            _movies = LoadMovies();
+            _movies = LoadMovies(filePath);
         }
 
         public List<Movie> GetMovies()
@@ -22,10 +22,10 @@ namespace CommandLineVideoStore
             return _movies[number];
         }
 
-        private List<Movie> LoadMovies()
+        private List<Movie> LoadMovies(string filePath)
         {
             var movies = new List<Movie>();
-            using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = File.Open(filePath, FileMode.Open, FileAccess.Read))
             using (BufferedStream bs = new BufferedStream(fs))
             using (StreamReader reader = new StreamReader(bs))
             {

@@ -42,13 +42,13 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental = _rentalFactory.CreateRental(input);
+                Rental rental = _rentalFactory.CreateFrom(input);
                 rentals.Add(rental);
             }
             return rentals;
         }
 
-        public void PrintRentals(Customer customer)
+        public void PrintRentalRecordFor(Customer customer)
         {
             _out.WriteLine("Rental Record for {0}", customer.Name);
             foreach (var rental in customer.Rentals)
@@ -58,12 +58,11 @@ namespace CommandLineVideoStore
             }
         }
 
-        public void PrintFooter(Customer customer)
+        public void PrintFooterFor(Customer customer)
         {   
             int frequentRenterPoints = customer.FrequentRenterPoints;
             decimal totalAmount = customer.TotalAmount;
 
-            // add footer lines
             _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
             _out.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
         }

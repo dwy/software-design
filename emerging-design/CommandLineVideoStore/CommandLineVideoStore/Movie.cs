@@ -6,10 +6,12 @@ namespace CommandLineVideoStore
         private readonly string _type;
         private readonly int _number;
 
-        public static Movie ParseFrom(string line, int movieNumber)
+        public static Movie ParseFrom(string line, int number)
         {
             string[] movie = line.Split(';');
-            return new Movie(movie[0], movie[1], movieNumber);
+            string title = movie[0];
+            string type = movie[1];
+            return new Movie(title, type, number);
         }
 
         private Movie(string title, string type, int number)
