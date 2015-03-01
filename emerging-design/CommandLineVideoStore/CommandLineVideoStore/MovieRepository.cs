@@ -5,6 +5,13 @@ namespace CommandLineVideoStore
 {
     public class MovieRepository
     {
+        private List<Movie> _movies;
+
+        public MovieRepository()
+        {
+            _movies = GetMovies();
+        }
+
         public static List<Movie> GetMovies()
         {
             var movies = new List<Movie>();
