@@ -11,10 +11,10 @@ namespace CommandLineVideoStore
             _movieRepository = movieRepository;
         }
 
-        public Rental CreateRental(MovieRepository movieRepository, string input)
+        public Rental CreateRental(string input)
         {
             var rental = ParseFrom(input);
-            rental.Movie = movieRepository.GetMovieBy(rental.MovieNumber);
+            rental.Movie = _movieRepository.GetMovieBy(rental.MovieNumber);
             return rental;
         }
 
