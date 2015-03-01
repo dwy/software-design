@@ -52,7 +52,7 @@ namespace CommandLineVideoStore
                 Movie movie = _movieRepository.GetMovieBy(rental.MovieNumber);
                 rentals.Add(rental);
 
-                decimal thisAmount = Rental.CalculateRentalAmount(movie, rental);
+                decimal thisAmount = rental.CalculateAmount(movie);
 
                 // add frequent renter points
                 frequentRenterPoints++;
