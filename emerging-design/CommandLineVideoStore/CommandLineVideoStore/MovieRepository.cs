@@ -12,7 +12,7 @@ namespace CommandLineVideoStore
             _movies = LoadMovies();
         }
 
-        public static List<Movie> GetMovies(MovieRepository movieRepository)
+        public List<Movie> GetMovies()
         {
             return LoadMovies();
         }

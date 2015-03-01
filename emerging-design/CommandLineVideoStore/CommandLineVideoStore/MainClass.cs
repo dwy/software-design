@@ -9,6 +9,7 @@ namespace CommandLineVideoStore
     {
         private readonly TextReader _in;
         private readonly TextWriter _out;
+        private readonly MovieRepository _movieRepository;
 
         public static void Main()
         {
@@ -20,12 +21,12 @@ namespace CommandLineVideoStore
         {
             _out = @out;
             _in = @in;
+            _movieRepository = new MovieRepository();
         }
 
         public void Run()
         {
-            var movieRepository = new MovieRepository();
-            List<Movie> movies = MovieRepository.GetMovies(movieRepository);
+            List<Movie> movies = _movieRepository.GetMovies();
             foreach (var movie in movies)
             {
                 _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
