@@ -29,17 +29,8 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            List<Movie> movies = _movieRepository.GetMovies();
-            foreach (var movie in movies)
-            {
-                _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
-            }
-
-            _out.Write("Enter customer name: ");
-            string customerName = _in.ReadLine();
-
-            _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
-
+            PrintMovies();
+            string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
 
             string result = "Rental Record for " + customerName + "\n";
@@ -62,7 +53,8 @@ namespace CommandLineVideoStore
 
         private List<Rental> ReadRentals()
         {
-            var rentals = new List<Rental>();
+            _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
+            var rentals1 = new List<Rental>();
             while (true)
             {
                 string input = _in.ReadLine();
@@ -70,10 +62,28 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental = _rentalFactory.CreateRental(input);
-                rentals.Add(rental);
+                Rental rental1 = _rentalFactory.CreateRental(input);
+                rentals1.Add(rental1);
             }
+
+            List<Rental> rentals = rentals1;
             return rentals;
+        }
+
+        private string ReadCustomerName()
+        {
+            _out.Write("Enter customer name: ");
+            string customerName = _in.ReadLine();
+            return customerName;
+        }
+
+        private void PrintMovies()
+        {
+            List<Movie> movies = _movieRepository.GetMovies();
+            foreach (var movie in movies)
+            {
+                _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
+            }
         }
 
         private static int CalculateFrequentRenterPoints(List<Rental> rentals)
