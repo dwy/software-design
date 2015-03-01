@@ -32,14 +32,15 @@ namespace CommandLineVideoStore
             PrintMovies();
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
-            PrintRentals(new Customer(customerName, rentals));
-            PrintFooter(rentals);
+            var customer = new Customer(customerName, rentals);
+            PrintRentals(customer);
+            PrintFooter(customer);
         }
 
-        private void PrintFooter(List<Rental> rentals)
-        {
-            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
-            decimal totalAmount = CalculateTotalAmount(rentals);
+        private void PrintFooter(Customer customer)
+        {   
+            int frequentRenterPoints = CalculateFrequentRenterPoints(customer);
+            decimal totalAmount = CalculateTotalAmount(customer);
 
             // add footer lines
             _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
@@ -89,10 +90,10 @@ namespace CommandLineVideoStore
             }
         }
 
-        private static int CalculateFrequentRenterPoints(List<Rental> rentals)
+        private static int CalculateFrequentRenterPoints(Customer customer)
         {
             int frequentRenterPoints = 0;
-            foreach (var rental in rentals)
+            foreach (var rental in customer.Rentals)
             {
                 frequentRenterPoints++;
                 if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
@@ -103,9 +104,9 @@ namespace CommandLineVideoStore
             return frequentRenterPoints;
         }
 
-        private static decimal CalculateTotalAmount(List<Rental> rentals)
+        private static decimal CalculateTotalAmount(Customer customer)
         {
-            return rentals.Sum(rental => rental.CalculateAmount());
+            return customer.Rentals.Sum(rental => rental.CalculateAmount());
         }
     }
 }
