@@ -14,7 +14,7 @@ namespace CommandLineVideoStore
 
         public List<Movie> GetMovies()
         {
-            return LoadMovies();
+            return _movies;
         }
 
         private static List<Movie> LoadMovies()
