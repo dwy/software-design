@@ -46,7 +46,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = Rental.ParseFrom(input);
+                var rental = RentalFactory.ParseFrom(input);
                 rentals.Add(rental);
                 Movie movie = movies[rental.MovieNumber];
                 decimal thisAmount = 0;
