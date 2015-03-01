@@ -37,6 +37,7 @@ namespace CommandLineVideoStore
 
             decimal totalAmount = 0;
             int frequentRenterPoints = 0;
+            var rentals = new List<Rental>();
             string result = "Rental Record for " + customerName + "\n";
             while (true)
             {
@@ -46,6 +47,7 @@ namespace CommandLineVideoStore
                     break;
                 }
                 var rental = Rental.ParseFrom(input);
+                rentals.Add(rental);
                 Movie movie = movies[rental.MovieNumber];
                 decimal thisAmount = 0;
 
