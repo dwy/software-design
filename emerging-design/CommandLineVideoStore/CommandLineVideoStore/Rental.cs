@@ -13,7 +13,7 @@ namespace CommandLineVideoStore
             return new Rental(int.Parse(rentalTokens[0]), int.Parse(rentalTokens[1]));
         }
 
-        private Rental(int movieNumber, int daysRented)
+        public Rental(int movieNumber, int daysRented)
         {
             _movieNumber = movieNumber;
             _daysRented = daysRented;
