@@ -16,9 +16,8 @@ namespace CommandLineVideoStore
             string[] rentalTokens = input.Split(' ');
             int movieNumber = Int32.Parse(rentalTokens[0]);
             int daysRented = Int32.Parse(rentalTokens[1]);
-            var rental = new Rental(movieNumber, daysRented);
-            rental.Movie = _movieRepository.GetMovieBy(rental.MovieNumber);
-            return rental;
+            Movie movie = _movieRepository.GetMovieBy(movieNumber);
+            return new Rental(movie, daysRented);
         }
     }
 }
