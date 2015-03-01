@@ -6,6 +6,7 @@ namespace CommandLineVideoStore
     {
         private readonly int _movieNumber;
         private readonly int _daysRented;
+        private Movie _movie;
 
         public Rental(int movieNumber, int daysRented)
         {
@@ -21,6 +22,12 @@ namespace CommandLineVideoStore
         public int DaysRented
         {
             get { return _daysRented; }
+        }
+
+        public Movie Movie
+        {
+            get { return _movie; }
+            set { _movie = value; }
         }
 
         public decimal CalculateAmount(Movie movie)
