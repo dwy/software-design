@@ -8,6 +8,13 @@ namespace CommandLineVideoStore
         private readonly int _daysRented;
         private Movie _movie;
 
+        public Rental(Movie movie, int daysRented)
+        {
+            _daysRented = daysRented;
+            _movie = movie;
+            _movieNumber = movie.Number;
+        }
+
         public Rental(int movieNumber, int daysRented)
         {
             _movieNumber = movieNumber;
