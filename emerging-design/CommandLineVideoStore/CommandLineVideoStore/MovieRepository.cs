@@ -5,7 +5,7 @@ namespace CommandLineVideoStore
 {
     public class MovieRepository
     {
-        private List<Movie> _movies;
+        private readonly List<Movie> _movies;
 
         public MovieRepository()
         {
@@ -15,6 +15,11 @@ namespace CommandLineVideoStore
         public List<Movie> GetMovies()
         {
             return _movies;
+        }
+
+        public Movie GetMovieBy(int number)
+        {
+            return _movies[number];
         }
 
         private List<Movie> LoadMovies()
@@ -34,11 +39,6 @@ namespace CommandLineVideoStore
                 }
             }
             return movies;
-        }
-
-        public Movie GetMovieBy(int number)
-        {
-            return _movies[number];
         }
     }
 }
