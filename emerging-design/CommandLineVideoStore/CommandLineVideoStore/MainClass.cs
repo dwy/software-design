@@ -50,7 +50,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                Rental rental = RentalFactory.CreateRental(_movieRepository, _rentalFactory, input);
+                Rental rental = _rentalFactory.CreateRental(_movieRepository, input);
                 rentals.Add(rental);
 
                 decimal thisAmount = rental.CalculateAmount(rental.Movie);
