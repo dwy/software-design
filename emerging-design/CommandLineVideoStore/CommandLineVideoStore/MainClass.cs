@@ -33,11 +33,11 @@ namespace CommandLineVideoStore
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
 
-            string result = "Rental Record for " + customerName + "\n";
+            string result = string.Format("Rental Record for {0}\n", customerName);
             foreach (var rental in rentals)
             {
                 decimal thisAmount = rental.CalculateAmount();
-                string rentalInfo = "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+                string rentalInfo = string.Format("\t{0}\t{1}\n", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
                 result += rentalInfo;
             }
 
@@ -45,8 +45,8 @@ namespace CommandLineVideoStore
             decimal totalAmount = CalculateTotalAmount(rentals);
 
             // add footer lines
-            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
+            result += string.Format("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
+            result += string.Format("You earned {0} frequent renter points\n", frequentRenterPoints);
 
             _out.Write(result);
         }
@@ -54,7 +54,7 @@ namespace CommandLineVideoStore
         private List<Rental> ReadRentals()
         {
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
-            var rentals1 = new List<Rental>();
+            var rentals = new List<Rental>();
             while (true)
             {
                 string input = _in.ReadLine();
@@ -63,10 +63,9 @@ namespace CommandLineVideoStore
                     break;
                 }
                 Rental rental1 = _rentalFactory.CreateRental(input);
-                rentals1.Add(rental1);
+                rentals.Add(rental1);
             }
 
-            List<Rental> rentals = rentals1;
             return rentals;
         }
 
