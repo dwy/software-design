@@ -48,7 +48,7 @@ namespace CommandLineVideoStore
                 }
                 var rental = RentalFactory.ParseFrom(input);
                 rentals.Add(rental);
-                Movie movie = movies[rental.MovieNumber];
+                Movie movie = GetMovieBy(movies, rental.MovieNumber);
                 decimal thisAmount = 0;
 
                 //determine amounts for rental
@@ -86,6 +86,11 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static Movie GetMovieBy(List<Movie> movies, int movieNumber)
+        {
+            return movies[movieNumber];
         }
     }
 }
