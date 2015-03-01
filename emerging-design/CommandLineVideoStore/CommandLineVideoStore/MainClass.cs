@@ -32,20 +32,28 @@ namespace CommandLineVideoStore
             PrintMovies();
             string customerName = ReadCustomerName();
             List<Rental> rentals = ReadRentals();
+            PrintRentals(customerName, rentals);
+            PrintFooter(rentals);
+        }
 
-            _out.WriteLine("Rental Record for {0}", customerName);
-            foreach (var rental in rentals)
-            {
-                decimal thisAmount = rental.CalculateAmount();
-                _out.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
-            }
-
+        private void PrintFooter(List<Rental> rentals)
+        {
             int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
             // add footer lines
             _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
             _out.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
+        }
+
+        private void PrintRentals(string customerName, List<Rental> rentals)
+        {
+            _out.WriteLine("Rental Record for {0}", customerName);
+            foreach (var rental in rentals)
+            {
+                decimal thisAmount = rental.CalculateAmount();
+                _out.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
+            }
         }
 
         private List<Rental> ReadRentals()
