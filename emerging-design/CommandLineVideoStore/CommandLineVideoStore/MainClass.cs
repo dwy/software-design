@@ -39,8 +39,8 @@ namespace CommandLineVideoStore
 
         private void PrintFooter(Customer customer)
         {   
-            int frequentRenterPoints = CalculateFrequentRenterPoints(customer);
-            decimal totalAmount = CalculateTotalAmount(customer);
+            int frequentRenterPoints = customer.FrequentRenterPoints;
+            decimal totalAmount = customer.TotalAmount;
 
             // add footer lines
             _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
@@ -88,25 +88,6 @@ namespace CommandLineVideoStore
             {
                 _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
             }
-        }
-
-        private static int CalculateFrequentRenterPoints(Customer customer)
-        {
-            int frequentRenterPoints = 0;
-            foreach (var rental in customer.Rentals)
-            {
-                frequentRenterPoints++;
-                if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
-                {
-                    frequentRenterPoints++;
-                }
-            }
-            return frequentRenterPoints;
-        }
-
-        private static decimal CalculateTotalAmount(Customer customer)
-        {
-            return customer.Rentals.Sum(rental => rental.CalculateAmount());
         }
     }
 }

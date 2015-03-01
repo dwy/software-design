@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CommandLineVideoStore
 {
@@ -21,6 +22,28 @@ namespace CommandLineVideoStore
         public List<Rental> Rentals
         {
             get { return _rentals; }
+        }
+
+        public int FrequentRenterPoints
+        {
+            get
+            {
+                int frequentRenterPoints = 0;
+                foreach (var rental in Rentals)
+                {
+                    frequentRenterPoints++;
+                    if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                    {
+                        frequentRenterPoints++;
+                    }
+                }
+                return frequentRenterPoints;
+            }
+        }
+
+        public decimal TotalAmount
+        {
+            get { return Rentals.Sum(rental => rental.CalculateAmount()); }
         }
     }
 }
