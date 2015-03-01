@@ -40,8 +40,6 @@ namespace CommandLineVideoStore
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
-            int frequentRenterPoints = 0;
-            int frequentRenterPoints2 = 0;
             var rentals = new List<Rental>();
             string result = "Rental Record for " + customerName + "\n";
             while (true)
@@ -56,33 +54,32 @@ namespace CommandLineVideoStore
 
                 decimal thisAmount = rental.CalculateAmount();
 
-                // add frequent renter points
-                frequentRenterPoints++;
-                // add bonus for a two day new release rental
-                if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
-                {
-                    frequentRenterPoints++;
-                }
                 // show figures for this rental
                 result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
 
-            foreach (var rental in rentals)
-            {
-                frequentRenterPoints2++;
-                if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
-                {
-                    frequentRenterPoints2++;
-                }
-            }
-
+            int frequentRenterPoints = CalculateFrequentRenterPoints(rentals);
             decimal totalAmount = CalculateTotalAmount(rentals);
 
             // add footer lines
             result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            result += "You earned " + frequentRenterPoints2 + " frequent renter points\n";
+            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static int CalculateFrequentRenterPoints(List<Rental> rentals)
+        {
+            int frequentRenterPoints = 0;
+            foreach (var rental in rentals)
+            {
+                frequentRenterPoints++;
+                if (rental.Movie.Type.Equals("NEW_RELEASE") && rental.DaysRented > 1)
+                {
+                    frequentRenterPoints++;
+                }
+            }
+            return frequentRenterPoints;
         }
 
         private static decimal CalculateTotalAmount(List<Rental> rentals)
