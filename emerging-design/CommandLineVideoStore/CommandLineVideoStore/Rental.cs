@@ -1,29 +1,14 @@
-using System;
-
 namespace CommandLineVideoStore
 {
     public class Rental
     {
-        private readonly int _movieNumber;
         private readonly int _daysRented;
-        private Movie _movie;
+        private readonly Movie _movie;
 
         public Rental(Movie movie, int daysRented)
         {
             _daysRented = daysRented;
             _movie = movie;
-            _movieNumber = movie.Number;
-        }
-
-        public Rental(int movieNumber, int daysRented)
-        {
-            _movieNumber = movieNumber;
-            _daysRented = daysRented;
-        }
-
-        public int MovieNumber
-        {
-            get { return _movieNumber; }
         }
 
         public int DaysRented
@@ -34,7 +19,6 @@ namespace CommandLineVideoStore
         public Movie Movie
         {
             get { return _movie; }
-            set { _movie = value; }
         }
 
         public decimal CalculateAmount(Movie movie)
