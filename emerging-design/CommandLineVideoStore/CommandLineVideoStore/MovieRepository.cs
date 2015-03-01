@@ -17,7 +17,7 @@ namespace CommandLineVideoStore
             return _movies;
         }
 
-        private static List<Movie> LoadMovies()
+        private List<Movie> LoadMovies()
         {
             var movies = new List<Movie>();
             using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))
