@@ -31,7 +31,7 @@ namespace CommandLineVideoStore
         {
             PrintMovies(_out, _movieRepository);
             string customerName = ReadCustomerName(_out);
-            List<Rental> rentals = ReadRentals(_out, _rentalFactory);
+            List<Rental> rentals = ReadRentals(_in, _out, _rentalFactory);
             var customer = new Customer(customerName, rentals);
             PrintRentals(customer, _out);
             PrintFooter(customer, _out);
@@ -57,13 +57,13 @@ namespace CommandLineVideoStore
             }
         }
 
-        public List<Rental> ReadRentals(TextWriter textWriter, RentalFactory rentalFactory)
+        public List<Rental> ReadRentals(TextReader textReader, TextWriter textWriter, RentalFactory rentalFactory)
         {
             textWriter.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
             var rentals = new List<Rental>();
             while (true)
             {
-                string input = _in.ReadLine();
+                string input = textReader.ReadLine();
                 if (string.IsNullOrEmpty(input))
                 {
                     break;
