@@ -9,10 +9,15 @@ namespace CommandLineVideoStore
 
         public MovieRepository()
         {
-            _movies = GetMovies();
+            _movies = LoadMovies();
         }
 
-        public static List<Movie> GetMovies()
+        public static List<Movie> GetMovies(MovieRepository movieRepository)
+        {
+            return LoadMovies();
+        }
+
+        private static List<Movie> LoadMovies()
         {
             var movies = new List<Movie>();
             using (FileStream fs = File.Open(@"movies.cvs", FileMode.Open, FileAccess.Read))

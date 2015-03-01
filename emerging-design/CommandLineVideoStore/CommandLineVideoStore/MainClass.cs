@@ -24,7 +24,8 @@ namespace CommandLineVideoStore
 
         public void Run()
         {
-            List<Movie> movies = MovieRepository.GetMovies();
+            var movieRepository = new MovieRepository();
+            List<Movie> movies = MovieRepository.GetMovies(movieRepository);
             foreach (var movie in movies)
             {
                 _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
