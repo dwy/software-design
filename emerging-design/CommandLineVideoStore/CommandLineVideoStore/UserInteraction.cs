@@ -6,68 +6,68 @@ namespace CommandLineVideoStore
 {
     public class UserInteraction
     {
-        private TextWriter _textWriter;
-        private TextReader _textReader;
-        private RentalFactory _rentalFactory;
+        private readonly TextWriter _out;
+        private readonly TextReader _in;
+        private readonly RentalFactory _rentalFactory;
 
-        public UserInteraction()
+        public UserInteraction(TextReader @in, TextWriter @out, RentalFactory rentalFactory)
         {
+            _out = @out;
+            _in = @in;
+            _rentalFactory = rentalFactory;
         }
 
-        public void PrintFooter(Customer customer, TextWriter textWriter)
-        {   
-            int frequentRenterPoints = customer.FrequentRenterPoints;
-            decimal totalAmount = customer.TotalAmount;
-
-            // add footer lines
-            textWriter.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
-            textWriter.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
-        }
-
-        public void PrintRentals(Customer customer, TextWriter textWriter)
+        public void PrintMovies(MovieRepository movieRepository)
         {
-            textWriter.WriteLine("Rental Record for {0}", customer.Name);
-            foreach (var rental in customer.Rentals)
+            List<Movie> movies = movieRepository.GetMovies();
+            foreach (var movie in movies)
             {
-                decimal thisAmount = rental.CalculateAmount();
-                textWriter.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
+                _out.WriteLine("{0}: {1}", movie.Number, movie.Title);
             }
         }
 
-        public List<Rental> ReadRentals(TextReader textReader, TextWriter textWriter, RentalFactory rentalFactory)
+        public string ReadCustomerName()
         {
-            _rentalFactory = rentalFactory;
-            textWriter.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
+            _out.Write("Enter customer name: ");
+            string customerName = _in.ReadLine();
+            return customerName;
+        }
+
+        public List<Rental> ReadRentals()
+        {
+            _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
             var rentals = new List<Rental>();
             while (true)
             {
-                string input = textReader.ReadLine();
+                string input = _in.ReadLine();
                 if (string.IsNullOrEmpty(input))
                 {
                     break;
                 }
-                Rental rental = rentalFactory.CreateRental(input);
+                Rental rental = _rentalFactory.CreateRental(input);
                 rentals.Add(rental);
             }
             return rentals;
         }
 
-        public string ReadCustomerName(TextReader textReader, TextWriter textWriter)
+        public void PrintRentals(Customer customer)
         {
-            _textReader = textReader;
-            textWriter.Write("Enter customer name: ");
-            string customerName = textReader.ReadLine();
-            return customerName;
+            _out.WriteLine("Rental Record for {0}", customer.Name);
+            foreach (var rental in customer.Rentals)
+            {
+                decimal thisAmount = rental.CalculateAmount();
+                _out.WriteLine("\t{0}\t{1}", rental.Movie.Title, thisAmount.ToString("0.0", CultureInfo.InvariantCulture));
+            }
         }
 
-        public void PrintMovies(TextWriter textWriter, MovieRepository movieRepository)
-        {
-            _textWriter = textWriter;
-            List<Movie> movies = movieRepository.GetMovies();
-            foreach (var movie in movies)
-            {
-                textWriter.WriteLine("{0}: {1}", movie.Number, movie.Title);
-            }
+        public void PrintFooter(Customer customer)
+        {   
+            int frequentRenterPoints = customer.FrequentRenterPoints;
+            decimal totalAmount = customer.TotalAmount;
+
+            // add footer lines
+            _out.Write("You owed {0}\n", totalAmount.ToString("0.0", CultureInfo.InvariantCulture));
+            _out.WriteLine("You earned {0} frequent renter points", frequentRenterPoints);
         }
     }
 }

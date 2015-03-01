@@ -26,17 +26,17 @@ namespace CommandLineVideoStore
             _in = @in;
             _movieRepository = new MovieRepository();
             _rentalFactory = new RentalFactory(_movieRepository);
-            _userInteraction = new UserInteraction();
+            _userInteraction = new UserInteraction(@in, @out, _rentalFactory);
         }
 
         public void Run()
         {
-            _userInteraction.PrintMovies(_out, _movieRepository);
-            string customerName = _userInteraction.ReadCustomerName(_in, _out);
-            List<Rental> rentals = _userInteraction.ReadRentals(_in, _out, _rentalFactory);
+            _userInteraction.PrintMovies(_movieRepository);
+            string customerName = _userInteraction.ReadCustomerName();
+            List<Rental> rentals = _userInteraction.ReadRentals();
             var customer = new Customer(customerName, rentals);
-            _userInteraction.PrintRentals(customer, _out);
-            _userInteraction.PrintFooter(customer, _out);
+            _userInteraction.PrintRentals(customer);
+            _userInteraction.PrintFooter(customer);
         }
     }
 }
