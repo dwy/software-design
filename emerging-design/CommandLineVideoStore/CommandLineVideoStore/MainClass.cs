@@ -48,7 +48,7 @@ namespace CommandLineVideoStore
                 {
                     break;
                 }
-                var rental = RentalFactory.ParseFrom(input);
+                var rental = RentalFactory.ParseFrom(new RentalFactory(_movieRepository), input);
                 Movie movie = _movieRepository.GetMovieBy(rental.MovieNumber);
                 rentals.Add(rental);
 
