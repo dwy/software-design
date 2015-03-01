@@ -13,15 +13,12 @@ namespace CommandLineVideoStore
 
         public Rental CreateRental(string input)
         {
-            var rental = ParseFrom(input);
+            string[] rentalTokens = input.Split(' ');
+            int movieNumber = Int32.Parse(rentalTokens[0]);
+            int daysRented = Int32.Parse(rentalTokens[1]);
+            var rental = new Rental(movieNumber, daysRented);
             rental.Movie = _movieRepository.GetMovieBy(rental.MovieNumber);
             return rental;
-        }
-
-        private Rental ParseFrom(string input)
-        {
-            string[] rentalTokens = input.Split(' ');
-            return new Rental(Int32.Parse(rentalTokens[0]), Int32.Parse(rentalTokens[1]));
         }
     }
 }
