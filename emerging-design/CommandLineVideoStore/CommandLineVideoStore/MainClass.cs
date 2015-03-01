@@ -49,27 +49,10 @@ namespace CommandLineVideoStore
                     break;
                 }
                 var rental = RentalFactory.ParseFrom(input);
-                rentals.Add(rental);
                 Movie movie = _movieRepository.GetMovieBy(rental.MovieNumber);
-                decimal thisAmount = 0;
+                rentals.Add(rental);
 
-                //determine amounts for rental
-                switch (movie.Type)
-                {
-                    case "REGULAR":
-                        thisAmount += 2;
-                        if (rental.DaysRented > 2)
-                            thisAmount += (rental.DaysRented - 2) * 1.5m;
-                        break;
-                    case "NEW_RELEASE":
-                        thisAmount += rental.DaysRented * 3;
-                        break;
-                    case "CHILDRENS":
-                        thisAmount += 1.5m;
-                        if (rental.DaysRented > 3)
-                            thisAmount += (rental.DaysRented - 3) * 1.5m;
-                        break;
-                }
+                decimal thisAmount = CalculateRentalAmount(movie, rental);
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -88,6 +71,28 @@ namespace CommandLineVideoStore
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static decimal CalculateRentalAmount(Movie movie, Rental rental)
+        {
+            decimal thisAmount = 0;
+            switch (movie.Type)
+            {
+                case "REGULAR":
+                    thisAmount += 2;
+                    if (rental.DaysRented > 2)
+                        thisAmount += (rental.DaysRented - 2)*1.5m;
+                    break;
+                case "NEW_RELEASE":
+                    thisAmount += rental.DaysRented*3;
+                    break;
+                case "CHILDRENS":
+                    thisAmount += 1.5m;
+                    if (rental.DaysRented > 3)
+                        thisAmount += (rental.DaysRented - 3)*1.5m;
+                    break;
+            }
+            return thisAmount;
         }
     }
 }
