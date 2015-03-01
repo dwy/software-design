@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace CommandLineVideoStore
 {
@@ -39,7 +40,6 @@ namespace CommandLineVideoStore
 
             _out.WriteLine("Choose movie by number followed by rental days, just ENTER for bill:");
 
-            decimal totalAmount2 = 0;
             int frequentRenterPoints = 0;
             var rentals = new List<Rental>();
             string result = "Rental Record for " + customerName + "\n";
@@ -66,16 +66,18 @@ namespace CommandLineVideoStore
                 result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
 
-            foreach (var rental in rentals)
-            {
-                totalAmount2 += rental.CalculateAmount();
-            }
+            decimal totalAmount = CalculateTotalAmount(rentals);
 
             // add footer lines
-            result += "You owed " + totalAmount2.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+            result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
             _out.Write(result);
+        }
+
+        private static decimal CalculateTotalAmount(List<Rental> rentals)
+        {
+            return rentals.Sum(rental => rental.CalculateAmount());
         }
     }
 }
