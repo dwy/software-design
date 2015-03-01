@@ -51,10 +51,11 @@ namespace CommandLineVideoStore
                 }
                 Rental rental = _rentalFactory.CreateRental(input);
                 rentals.Add(rental);
+            }
 
+            foreach (var rental in rentals)
+            {
                 decimal thisAmount = rental.CalculateAmount();
-
-                // show figures for this rental
                 result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             }
 
