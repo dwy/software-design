@@ -21,10 +21,10 @@ namespace CommandLineVideoStore
             get { return _movie; }
         }
 
-        public decimal CalculateAmount(Movie movie)
+        public decimal CalculateAmount()
         {
             decimal thisAmount = 0;
-            switch (movie.Type)
+            switch (_movie.Type)
             {
                 case "REGULAR":
                     thisAmount += 2;
