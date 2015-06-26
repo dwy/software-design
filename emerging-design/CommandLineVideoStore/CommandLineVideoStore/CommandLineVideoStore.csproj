@@ -53,10 +53,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Customer.cs" />
+    <Compile Include="CustomerTest.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="MainTest.cs" />
+    <Compile Include="MovieTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentalFactory.cs" />
+    <Compile Include="RentalTest.cs" />
     <Compile Include="UserInteraction.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,8 +26,9 @@ namespace CommandLineVideoStore
             var inputStream = new MemoryStream(inputBytes);
             var inputStreamReader = new StreamReader(inputStream);
             var outputStringWriter = new StringWriter { NewLine = "\n" };
+            var movieRepository = new MovieRepository(@"movies.cvs");
 
-            new MainClass(inputStreamReader, outputStringWriter).Run();
+            new MainClass(inputStreamReader, outputStringWriter, movieRepository).Run();
 
             Assert.AreEqual("0: The Shawshank Redemption (1994)\n" +
                             "1: The Godfather (1972)\n" +

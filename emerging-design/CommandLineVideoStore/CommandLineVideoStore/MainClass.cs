@@ -11,15 +11,15 @@ namespace CommandLineVideoStore
 
         public static void Main()
         {
-            new MainClass(Console.In, Console.Out).Run();
+            new MainClass(Console.In, Console.Out, new MovieRepository(@"movies.cvs")).Run();
             Console.ReadLine();
         }
 
-        public MainClass(TextReader @in, TextWriter @out)
+        public MainClass(TextReader @in, TextWriter @out, MovieRepository movieRepository)
         {
-            _movieRepository = new MovieRepository(@"movies.cvs");
-            var rentalFactory = new RentalFactory(_movieRepository);
-            _userInteraction = new UserInteraction(@in, @out, rentalFactory);
+            this._movieRepository = movieRepository;
+            var rentalFactory = new RentalFactory(this._movieRepository);
+            this._userInteraction = new UserInteraction(@in, @out, rentalFactory);
         }
 
         public void Run()
